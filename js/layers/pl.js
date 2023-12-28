@@ -500,14 +500,11 @@ addLayer("pl", {
     clickables: {
     11: {
         title: "<h3>Star Fusioner</h3>",
-        display() {return "Click or hold to get Stars. You get " + format(tmp.pl.base)+ " stars on click,<br> and "+ format(tmp.pl.base.div(10))+" stars on hold (Every tick)."},
+        display() {return "Hold to get Stars. You get " + format(tmp.pl.base.div(5))+ " stars on hold (Every tick)."},
         canClick() {return true},
         unlocked() {return true},
-onClick() {
-    return player.pl.points = player.pl.points.add(tmp.pl.base)
-},
 onHold() {
-    return player.pl.points = player.pl.points.add(tmp.pl.base.div(10))	
+    return player.pl.points = player.pl.points.add(tmp.pl.base.div(5))	
 },
                                 style() {
                     return {
