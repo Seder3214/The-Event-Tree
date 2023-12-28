@@ -1,0 +1,76 @@
+addLayer("ec", {
+    name: "events configurator", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "EC", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() { return {
+        unlocked: false,
+		points: new Decimal(0),
+    }},
+    color: "#343029",
+    requires: new Decimal(1e15), // Can be a function that takes requirement increases into account
+    resource: "event fragments", // Name of prestige currency
+    baseResource: "stars", // Name of resource prestige is based on
+    baseAmount() {return player.pl.points}, // Get the current amount of baseResource
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 4, // Prestige currency exponent
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1)
+    },
+    tabFormat: {
+        "Main": {
+        content:[
+            function() {if (player.tab == "ec") return "main-display"
+},
+            function() { if (player.tab == "ec")  return ["column", [
+            'prestige-button',
+            "blank",
+            ["display-text", "<i style='color: grey'>You have unlocked <b>Event Configurator</b></i> <br><i>Seems like you only got to Neptune's last upgrade, yes? Here you can expand events further, up to the end of them and make it faster!</i><hr>"],
+            "blank",
+			"buyables",
+			]
+        ]
+ },
+ ]
+        },
+    },
+    buyables: {
+        11: {
+            cost(x) {return new Decimal(1).mul(x.add(1)) },
+            display() {
+                    let data = tmp[this.layer].buyables[this.id]
+                    return "<h2><b>Expand Planetary Event</b></h2> <br>" + "Requirement: " + format(data.cost) + " Event Fragments <br>" + "Expandation: " + formatWhole(player[this.layer].buyables[this.id]) + "/6. <br>Also at first expand planets effects is 10.00x better."},
+            canAfford() { return player[this.layer].points.gte(this.cost()) },
+            buy() {
+                                cost = tmp[this.layer].buyables[this.id].cost
+                player[this.layer].points = player[this.layer].points.sub(this.cost())
+                setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+            },
+                                                            style() {
+                                                                                let data = tmp[this.layer].buyables[this.id]
+                    if (player.ec.points.lt(data.cost)) return {
+                            'border-color': 'gray',
+                            'background-color': '#181818',
+                            'color': 'white',
+                        }
+                    else return {
+                            'border-color': '#343029',
+                            'background-color': '#181818',
+                            'color': 'white',
+                        }
+                },
+                unlocked() {return true},
+        },
+    },
+    doReset(){
+        layerDataReset('pl')
+    },
+    row: "side", // Row the layer is in on the tree (0 is the first row)
+    hotkeys: [
+        {key: "e", description: "e: Reset for event fragments", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+    ],
+    layerShown(){return (hasUpgrade('pl',25))||player[this.layer].unlocked}
+})
