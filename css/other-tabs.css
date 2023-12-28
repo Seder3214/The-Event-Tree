@@ -11,7 +11,14 @@
 #optionWheel:hover {
 	transform: rotate(360deg);
 }
-
+#ui {
+	left: 0;
+	bottom: 0;
+	right: 0;
+		cursor: pointer;
+		position: absolute;
+			text-shadow: 0 0 10px #222034;
+	}
 #info {
 	font-size: 20px;
 	color: white;
@@ -58,18 +65,17 @@
 }
 
 #version {
-	position: absolute;
-	right: 4px;
-	top: 4px;
-	text-align: right;
-	color: var(--points);
-	text-shadow: 0 0 10px var(--points);
-	cursor: pointer;
+    position: absolute;
+    left: 425px;
+    bottom: 50px;
+    text-align: left;
+    color: #2c2a3e;
+    text-shadow: 0 0 10px #2c2a3e;
+    cursor: pointer;
 }
 
 #version:hover {
 	transform: scale(1.1, 1.1);
-	right: 4.8px;
 }
 
 a {
