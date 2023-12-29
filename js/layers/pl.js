@@ -79,6 +79,7 @@ addLayer("pl", {
             ["row", [["blank",['770px','50px']],["upgrade", 35]]],
             ["blank",'40px'],
             ["row", [["upgrade", 36],["blank",['130px','50px']]]],
+            ["display-text", (!player.ec.buyables[11].gt(1))&&(hasUpgrade('pl',36))?"<br><i>For now, the end is <b>here</b>. Expand to proceed.</i><hr></hr>":""],
             ]
 			]
  },
