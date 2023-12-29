@@ -843,8 +843,7 @@ onHover() {
             },
         },
         update(diff) {
-            player.pl.time = player.pl.time.add(diff)
-            if (player.pl.buyables[11].gte(1))player.pl.points = player.pl.points.add(tmp.pl.gain.times(diff))
+    if (player.pl.buyables[11].gte(1))player.pl.points = player.pl.points.add(tmp.pl.gain.times(diff))
            
         },
     row: 0, // Row the layer is in on the tree (0 is the first row)
