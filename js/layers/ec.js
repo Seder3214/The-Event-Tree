@@ -31,6 +31,7 @@ addLayer("ec", {
             ["display-text", "<i style='color: grey'>You have unlocked <b>Event Configurator</b></i> <br><i>Seems like you only got to Neptune's last upgrade, yes? Here you can expand events further, up to the end of them and make it faster!</i><hr>"],
             "blank",
 			"buyables",
+            "blank",
             "upgrades"
 			]
         ]
@@ -76,7 +77,7 @@ addLayer("ec", {
             },
             style() {
             if (hasUpgrade("ec", 11)) return {
-                'border-color': 'lightgreen',
+                'border-color': '#343029',
                 'background-color': '#181818',
                 'color': 'white'
             }
@@ -102,7 +103,7 @@ addLayer("ec", {
             },
             style() {
             if (hasUpgrade("ec", 12)) return {
-                'border-color': 'lightgreen',
+                'border-color': '#343029',
                 'background-color': '#181818',
                 'color': 'white'
             }
