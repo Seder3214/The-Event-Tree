@@ -824,7 +824,7 @@ addLayer("pl", {
     clickables: {
     11: {
         title: "<h3>Star Fusioner</h3>",
-        display() {return "Hold to get Stars. On hold you  get " + format(tmp.pl.base)+ " stars on hold (Every tick)."},
+        display() {return "Hold to get Stars. On hold you  get " + format(tmp.pl.base)+ " stars. (Every tick)."},
         canClick() {return true},
         unlocked() {return true},
 onHold() {
