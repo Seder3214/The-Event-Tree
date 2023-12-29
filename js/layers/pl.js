@@ -830,9 +830,6 @@ addLayer("pl", {
 onHold() {
     return player.pl.points = player.pl.points.add(tmp.pl.base)	
 },
-onHover() {
-    return player.pl.points = player.pl.points.add(tmp.pl.base)	
-},
                                 style() {
                     return {
                         'background-color': '#181818',
