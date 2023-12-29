@@ -71,6 +71,7 @@ addLayer("ec", {
             title: "Planet Boost I",
             description() {return "Get a 900% boost to Pluto and Neptune base gain."},
             cost: new Decimal(1),
+            canAfford() {return player.ec.points.gte(1)},
             unlocked() {return true},
             pay(){
                 return player.ec.points = player.ec.points
@@ -81,7 +82,7 @@ addLayer("ec", {
                 'background-color': '#181818',
                 'color': 'white'
             }
-            if (player.pl.points.gte(this.cost)) return {
+            if (player.ec.points.gte(this.cost)) return {
                 'border-color': 'yellow',
                 'background-color': '#181818',
                 'color': 'white'
@@ -97,6 +98,7 @@ addLayer("ec", {
             title: "Planet Boost II",
             description() {return "Meteor Bundle I and II works without buying them."},
             cost: new Decimal(2),
+           canAfford() {return player.ec.points.gte(2)},
             unlocked() {return (hasUpgrade('ec',11))},
             pay(){
                 return player.ec.points = player.ec.points
