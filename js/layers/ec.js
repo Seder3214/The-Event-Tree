@@ -12,7 +12,7 @@ addLayer("ec", {
     baseResource: "stars", // Name of resource prestige is based on
     baseAmount() {return player.pl.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 4, // Prestige currency exponent
+    exponent: 5.85, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -31,6 +31,7 @@ addLayer("ec", {
             ["display-text", "<i style='color: grey'>You have unlocked <b>Event Configurator</b></i> <br><i>Seems like you only got to Neptune's last upgrade, yes? Here you can expand events further, up to the end of them and make it faster!</i><hr>"],
             "blank",
 			"buyables",
+            "upgrades"
 			]
         ]
  },
@@ -42,11 +43,10 @@ addLayer("ec", {
             cost(x) {return new Decimal(1).mul(x.add(1)) },
             display() {
                     let data = tmp[this.layer].buyables[this.id]
-                    return "<h2><b>Expand Planetary Event</b></h2> <br>" + "Requirement: " + format(data.cost) + " Event Fragments <br>" + "Expandation: " + formatWhole(player[this.layer].buyables[this.id]) + "/6. <br>Also at first expand planets effects is 10.00x better."},
+                    return "<h2><b>Expand Planetary Event</b></h2> <br>" + "Requirement: " + format(data.cost) + " Event Fragments <br>" + "Expandation: " + formatWhole(player[this.layer].buyables[this.id]) + "/6."},
             canAfford() { return player[this.layer].points.gte(this.cost()) },
             buy() {
                                 cost = tmp[this.layer].buyables[this.id].cost
-                player[this.layer].points = player[this.layer].points.sub(this.cost())
                 setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
             },
                                                             style() {
@@ -63,6 +63,60 @@ addLayer("ec", {
                         }
                 },
                 unlocked() {return true},
+        },
+    },
+    upgrades: {
+        11: {
+            title: "Planet Boost I",
+            description() {return "Get a 900% boost to Pluto and Neptune base gain."},
+            cost: new Decimal(1),
+            unlocked() {return true},
+            pay(){
+                return player.ec.points = player.ec.points
+            },
+            style() {
+            if (hasUpgrade("ec", 11)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        12: {
+            title: "Planet Boost II",
+            description() {return "Meteor Bundle I and II works without buying them."},
+            cost: new Decimal(2),
+            unlocked() {return (hasUpgrade('ec',11))},
+            pay(){
+                return player.ec.points = player.ec.points
+            },
+            style() {
+            if (hasUpgrade("ec", 12)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.ec.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
         },
     },
     doReset(){

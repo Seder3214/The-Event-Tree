@@ -50,12 +50,12 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
-'Endgame - 1 Expandation'
+'Endgame - 2 Expandation'
 ]
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.ec.buyables[11].gte(1)
+	return player.ec.buyables[11].gte(2)
 }
 
 
