@@ -585,7 +585,7 @@ addLayer("pl", {
             unlocked() {return hasUpgrade('pl',29)||hasUpgrade('ec',12)},
             effect() {
                 let eff = new Decimal(1)
-                eff = player.pl.points.log10().add(1).pow(2)
+                eff = player.pl.points.add(1).log10().add(1).pow(2)
                 if (hasUpgrade('pl',34)||hasUpgrade('ec',12)) eff = eff.mul(upgradeEffect('pl',34).div(100).add(1))
                 return eff
             },
@@ -616,7 +616,7 @@ addLayer("pl", {
             unlocked() {return hasUpgrade('pl',32)||hasUpgrade('ec',12)},
             effect() {
                 let eff = new Decimal(1)
-                eff = player.points.pow(0.4).add(1).pow(2)
+                eff = player.points.pow(0.4).add(1).pow(2).max(1)
                 return eff
             },
             effectDisplay() { return format(upgradeEffect('pl',34))+"%"},
