@@ -763,7 +763,7 @@ addLayer("pl", {
                         }
                 },
             effect(x) {
-                let base = new Decimal(20000)
+                let base = new Decimal(50000)
                 if (hasUpgrade("pl",19)) base = base.times(4)
                 if (hasUpgrade("pl",21)) base = base.times(1.75)
                 if (hasUpgrade("pl",22)) base = base.times(1.5)
