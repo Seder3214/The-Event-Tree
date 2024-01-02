@@ -32,7 +32,8 @@ addLayer("ec", {
             "blank",
 			"buyables",
             "blank",
-            "upgrades"
+            "upgrades",
+            "grid"
 			]
         ]
  },
@@ -44,7 +45,7 @@ addLayer("ec", {
             cost(x) {return new Decimal(1).mul(x.add(1)) },
             display() {
                     let data = tmp[this.layer].buyables[this.id]
-                    return "<h2><b>Expand Planetary Event</b></h2> <br>" + "Requirement: " + format(data.cost) + " Event Fragments <br>" + "Expandation: " + formatWhole(player[this.layer].buyables[this.id]) + "/6."},
+                    return "<h2><b>Expand Planetary Event</b></h2> <br>" + "Event Cofigurator allows you to modify events! Unlock more planets and upgrades per level. <br>Requirement: " + format(data.cost) + " Event Fragments <br>" + "Expandation: " + formatWhole(player[this.layer].buyables[this.id]) + "/6."},
             canAfford() { return player[this.layer].points.gte(this.cost()) },
             buy() {
                                 cost = tmp[this.layer].buyables[this.id].cost
@@ -96,7 +97,7 @@ addLayer("ec", {
         },
         12: {
             title: "Planet Boost II",
-            description() {return "Meteor Bundle I and II works without buying them."},
+            description() {return "<b>Meteor Bundle I and II</b> works without buying them."},
             cost: new Decimal(2),
            canAfford() {return player.ec.points.gte(2)},
             unlocked() {return (hasUpgrade('ec',11))},

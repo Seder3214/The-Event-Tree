@@ -26,6 +26,10 @@ addLayer("pl", {
         if (player.pl.buyables[11].gte(1)) gain = gain.add(buyableEffect('pl',11).eff)
         if (player.pl.buyables[12].gte(1)) gain = gain.add(buyableEffect('pl',12).eff)
         if (player.pl.buyables[13].gte(1)) gain = gain.add(buyableEffect('pl',13).eff)
+        if (player.pl.buyables[14].gte(1)) gain = gain.add(buyableEffect('pl',14).eff)
+        if (hasUpgrade('pl',39)) gain = gain.mul(upgradeEffect('pl',39))
+        if (hasUpgrade('pl',44)) gain = gain.pow(upgradeEffect('pl',44))
+        if (player.pl.buyables[15].gte(1)) gain = gain.add(buyableEffect('pl',15).eff)
         return gain
     },
     base() {
@@ -45,7 +49,7 @@ addLayer("pl", {
             "blank",
             ["display-text", "<i style='color: grey'>What is <b>space</b>? And how big is our Solar System?</i> <br>Explore all planets in solar system, and <i>maybe there is something that will unlock after completing this event...</i><hr>"],
             "blank",
-			["upgrade", 11],
+			["row", [ ["upgrade", 44],["blank",['170px','50px']],["upgrade", 11]]],
 			["blank",'50px'],
             ["row", [ ["blank",['170px','50px']],["upgrade", 12]]],
             ["blank",'50px'],
@@ -78,8 +82,21 @@ addLayer("pl", {
             ["blank",'100px'],
             ["row", [["blank",['770px','50px']],["upgrade", 35]]],
             ["blank",'40px'],
-            ["row", [["upgrade", 36],["blank",['130px','50px']]]],
+            ["row", [["upgrade", 36],["blank",['35px','50px']]]],
             ["display-text", (!player.ec.buyables[11].gt(1))&&(hasUpgrade('pl',36))?"<br><i>For now, the end is <b>here</b>. Expand to proceed.</i><hr></hr>":""],
+            ["blank",'40px'],
+            ["row", [["buyable", 14],["blank",['30px','50px']],["blank",['200px','50px']],["buyable", 15]]],
+            ["blank",'80px'],
+            ["row", [ ["upgrade", 37],["blank",['320px','50px']],["upgrade", 45],["blank",['10px','50px']]]],
+            ["blank",'120px'],
+            ["row", [ ["upgrade", 38],["blank",['50px','50px']],["upgrade", 39],["blank",[hasUpgrade('pl',45)?'500px':'600px','50px']],["upgrade", 46]]],
+            ["blank",'80px'],
+            ["row", [ ["upgrade", 40],["blank",['100px','50px']],["upgrade", 47],["blank",[hasUpgrade('pl',46)?'0px':'600px','50px']]]],
+            ["blank",'150px'],
+            ["row", [ ["blank",[hasUpgrade('pl',47)?'180px':'0px','50px']],["upgrade", 41],["blank",[hasUpgrade('pl',47)?'510px':'430px','50px']],["upgrade", 48]]],
+            ["blank",'120px'],
+            ["row", [ ["upgrade", 42],["blank",['220px','50px']],["upgrade", 43],["blank",['440px','50px']]]],
+            ["row", [["blank",['450px','50px']],["upgrade", 49]]],
             ]
 			]
  },
@@ -386,6 +403,11 @@ addLayer("pl", {
             },
             effectDisplay() {return "+" + format(upgradeEffect("pl", 24))},
             style() {
+                if (hasUpgrade("pl", 25)) return {
+                    'border-color': 'red',
+                    'background-color': '#181818',
+                    'color': 'white'
+                }
             if (hasUpgrade("pl", 24)) return {
                 'border-color': 'lightgreen',
                 'background-color': '#181818',
@@ -537,6 +559,11 @@ addLayer("pl", {
             },
             effectDisplay() { return format(upgradeEffect('pl',31))+"%"},
             style() {
+                if (hasUpgrade("pl", 35)) return {
+                    'border-color': 'red',
+                    'background-color': '#181818',
+                    'color': 'white'
+                }
             if (hasUpgrade("pl", 31)) return {
                 'border-color': 'lightgreen',
                 'background-color': '#181818',
@@ -687,6 +714,334 @@ addLayer("pl", {
             }
             },
         },
+        37: {
+            branches: [36],
+            title: "Explore Saturn' Ring A (1/7)",
+            description() {return "Saturn 300% more efficient"},
+            cost: new Decimal(2e34),
+            unlocked() {return player.pl.buyables[14].gte(1)},
+            style() {
+            if (hasUpgrade("pl", 37)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        38: {
+            branches: [37],
+            title: "Explore Saturn' Ring B (2/7)",
+            description() {return "Saturn 1000% more efficient"},
+            cost: new Decimal(5e35),
+            unlocked() {return hasUpgrade('pl',36)},
+            style() {
+            if (hasUpgrade("pl", 38)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        39: {
+            branches: [37],
+            title: "Explore Saturn' Ring C (3/7)",
+            description() {return "<h5>Boost Stars gain based on difference between stars gain when holding <b>Star Fusioner</b> and passive stars gain.(20x/sec)</h5>"},
+            cost: new Decimal(2e37),
+            unlocked() {return hasUpgrade('pl',24)},
+            effect() {
+                let eff = new Decimal(1)
+                eff = (tmp.pl.gain.mul(20)).div(tmp.pl.gain)
+                if (hasUpgrade('pl',40)) eff = eff.mul(upgradeEffect('pl',40))
+                return eff
+            },
+            effectDisplay() { return "x"+format(upgradeEffect('pl',39))},
+            style() {
+            if (hasUpgrade("pl", 39)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        40: {
+            branches: [39],
+            title: "Explore Saturn' Ring D (4/7)",
+            description() {return "<h5>Additionally add a boost to prev. upgrade based on amount of buyed Planetary Event upgrades. </h5>"},
+            cost: new Decimal(2.5e39),
+            unlocked() {return hasUpgrade('pl',38)},
+            effect() { 	let ret = Decimal.pow(1.075, player[this.layer].upgrades.length)
+                return ret},
+            effectDisplay() { return "x"+format(upgradeEffect('pl',40))},
+            style() {
+            if (hasUpgrade("pl", 40)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        41: {
+            branches: [39],
+            title: "Explore Saturn' Ring E (5/7)",
+            description() {return "Saturn 2500% more efficient."},
+            cost: new Decimal(3e40),
+            unlocked() {return hasUpgrade('pl',38)},
+            style() {
+            if (hasUpgrade("pl", 41)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        42: {
+            branches: [41,38],
+            title: "Explore Saturn' Ring F (6/7)",
+            description() {return "Saturn 1000% more efficient."},
+            cost: new Decimal(1.2e42),
+            unlocked() {return hasUpgrade('pl',41)},
+            style() {
+            if (hasUpgrade("pl", 42)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        43: {
+            branches: [40,41],
+            title: "Explore Saturn' Ring G (7/7)",
+            description() {return "Uranus 100% less efficient.<br>Get more passive gain amount of stars as while holding <b>Star Fusioner</b>."},
+            cost: new Decimal(1.75e43),
+            unlocked() {return hasUpgrade('pl',41)},
+            style() {
+            if (hasUpgrade("pl", 43)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        44: {
+            branches: [11],
+            title: "Overflow I",
+            description() {return "Get exponentially more stars based on stars amount."},
+            cost: new Decimal(2e46),
+            unlocked() {return hasUpgrade('pl',43)},
+            effect() {
+                let eff = new Decimal(1)
+                eff = player.pl.points.add(1).log10().add(1).log10().add(1).div(3.25).add(0.5)
+                return eff
+            },
+            effectDisplay() { return "^"+format(upgradeEffect('pl',44))},
+            style() {
+            if (hasUpgrade("pl", 44)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        45: {
+            branches: [36],
+            title: "Strongest Magnetic Field",
+            description() {return "Jupiter 1000% more efficient."},
+            cost: new Decimal(1e65),
+            unlocked() {return hasUpgrade('pl',35)},
+            style() {
+            if (hasUpgrade("pl", 45)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        46: {
+            branches: [45],
+            title: "Explore Satellites: Io (1/4)",
+            description() {return "Jupiter 7500% more efficient."},
+            cost: new Decimal(1e66),
+            unlocked() {return hasUpgrade('pl',45)},
+            style() {
+            if (hasUpgrade("pl", 46)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        47: {
+            branches: [46],
+            title: "Explore Satellites: Callisto (2/4)",
+            description() {return "Jupiter 2500% more efficient."},
+            cost: new Decimal(1e68),
+            unlocked() {return hasUpgrade('pl',46)},
+            style() {
+            if (hasUpgrade("pl", 47)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        48: {
+            branches: [47],
+            title: "Explore Satellites: Ganymede (3/4)",
+            description() {return "Jupiter 1000% more efficient."},
+            cost: new Decimal(3e69),
+            unlocked() {return hasUpgrade('pl',47)},
+            style() {
+            if (hasUpgrade("pl", 48)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        49: {
+            branches: [48,45],
+            title: "Explore Satellites: Europe (4/4)",
+            description() {return "Jupiter 100000% more efficient."},
+            cost: new Decimal(3e69),
+            unlocked() {return hasUpgrade('pl',48)},
+            style() {
+            if (hasUpgrade("pl", 49)) return {
+                'border-color': 'lightgreen',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.pl.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
     },
     buyables: {
         11: {
@@ -707,7 +1062,12 @@ addLayer("pl", {
                 setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
             },
                                                             style() {
-                                                                                let data = tmp[this.layer].buyables[this.id]
+                    let data = tmp[this.layer].buyables[this.id]
+                    if (hasUpgrade("pl", 25)) return {
+                    'border-color': 'red',
+                    'background-color': '#181818',
+                    'color': 'white'
+                    }
                     if (player.pl.points.lt(data.cost)) return {
                             'border-color': 'gray',
                             'background-color': '#181818',
@@ -752,6 +1112,11 @@ addLayer("pl", {
             },
                                                             style() {
                                                                                 let data = tmp[this.layer].buyables[this.id]
+                    if (hasUpgrade("pl", 35)) return {
+                    'border-color': 'red',
+                    'background-color': '#181818',
+                    'color': 'white'
+                    }
                     if (player.pl.points.lt(data.cost)) return {
                             'border-color': 'gray',
                             'background-color': '#181818',
@@ -794,8 +1159,13 @@ addLayer("pl", {
                 player[this.layer].points = player[this.layer].points.sub(this.cost())
                 setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
             },
-                                                            style() {
-                                                                                let data = tmp[this.layer].buyables[this.id]
+                    style() {
+                        if (hasUpgrade("pl", 43)) return {
+                            'border-color': 'red',
+                            'background-color': '#181818',
+                            'color': 'white'
+                            }
+                    let data = tmp[this.layer].buyables[this.id]
                     if (player.pl.points.lt(data.cost)) return {
                             'border-color': 'gray',
                             'background-color': '#181818',
@@ -817,15 +1187,99 @@ addLayer("pl", {
                 if (hasUpgrade('pl',32)) base = base.mul(2501)
                 if (hasUpgrade("pl",35)) base = base.times(100)
                 if (hasUpgrade("pl",36)) base = base.times(1000)
+                if (hasUpgrade("pl",43)) base = base.times(0)
                 let eff = base.mul(x)
                 return {eff: eff, base: base}},
                 unlocked() {return player.ec.buyables[11].gte(1)&&hasUpgrade('pl',25)},
+        },
+        14: {
+            cost(x) {if (player.pl.buyables[14].gte(400)) return new Decimal(1e44).times(x.add(1)).pow(1.3)
+                if (player.pl.buyables[14].gte(300)) return new Decimal(1e41).times(x.add(1)).pow(1.2)
+                if (player.pl.buyables[14].gte(150)) return new Decimal(1e38).times(x.add(1)).pow(1.15)
+                if (player.pl.buyables[14].gte(50)) return new Decimal(1e35).times(x.add(player.pl.buyables[14]).add(1)).pow(new Decimal(1.075).add(player.pl.buyables[14].div(1000)))
+                if (player.pl.buyables[14].gte(30)) return new Decimal(1e33).times(x.add(player.pl.buyables[14]).add(1)).pow(1.05)
+                else return new Decimal(3e31).times(x.mul(4).add(1)).pow(1.05) },
+            display() {
+                    let data = tmp[this.layer].buyables[this.id]
+                    return "<h2><b>Saturn</b></h2> <br>" + "Requirement: " + format(data.cost) + " Stars <br>" + "Level: " + formatWhole(player[this.layer].buyables[this.id]) + " <br> Base Effect: +" + format(data.effect.base) + " stars/s"+ " <br> Produces: +" + format(data.effect.eff) + " stars/s<br>"},
+            canAfford() { return player[this.layer].points.gte(this.cost()) },
+            buy() {
+                                cost = tmp[this.layer].buyables[this.id].cost
+                player[this.layer].points = player[this.layer].points.sub(this.cost())
+                setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+            },
+                                                            style() {
+                                                                                let data = tmp[this.layer].buyables[this.id]
+                    if (player.pl.points.lt(data.cost)) return {
+                            'border-color': 'gray',
+                            'background-color': '#181818',
+                            'color': 'white',
+                        }
+                    else return {
+                            'border-color': 'lightgreen',
+                            'background-color': '#181818',
+                            'color': 'white',
+                        }
+                },
+            effect(x) {
+                let base = new Decimal(1e29)
+                //300,200,60,1000%
+                if (hasUpgrade("pl",37)) base = base.times(4)
+                if (hasUpgrade("pl",38)) base = base.times(11)
+                if (hasUpgrade("pl",39)) base = base.times(7)
+                if (hasUpgrade("pl",41)) base = base.times(26)
+                if (hasUpgrade("pl",42)) base = base.times(11)
+                if (hasUpgrade("pl",43)) base = base.times(101)
+                let eff = base.mul(x)
+                return {eff: eff, base: base}},
+                unlocked() {return player.ec.buyables[11].gte(2)&&hasUpgrade('pl',36)},
+        },
+        15: {
+            cost(x) {if (player.pl.buyables[15].gte(400)) return new Decimal(1e70).times(x.add(1)).pow(1.3)
+                if (player.pl.buyables[15].gte(300)) return new Decimal(1e67).times(x.add(1)).pow(1.2)
+                if (player.pl.buyables[15].gte(150)) return new Decimal(1e65).times(x.add(1)).pow(1.15)
+                if (player.pl.buyables[15].gte(50)) return new Decimal(1e58).times(x.add(player.pl.buyables[15]).add(1)).pow(new Decimal(1.075).add(player.pl.buyables[15].div(1000)))
+                if (player.pl.buyables[15].gte(30)) return new Decimal(1e60).times(x.add(player.pl.buyables[15]).add(1)).pow(1.05)
+                else return new Decimal(1e57).times(x.mul(4).add(1)).pow(1.05) },
+            display() {
+                    let data = tmp[this.layer].buyables[this.id]
+                    return "<h2><b>Jupiter</b></h2> <br>" + "Requirement: " + format(data.cost) + " Stars <br>" + "Level: " + formatWhole(player[this.layer].buyables[this.id]) + " <br> Base Effect: +" + format(data.effect.base) + " stars/s"+ " <br> Produces: +" + format(data.effect.eff) + " stars/s<br>"},
+            canAfford() { return player[this.layer].points.gte(this.cost()) },
+            buy() {
+                                cost = tmp[this.layer].buyables[this.id].cost
+                player[this.layer].points = player[this.layer].points.sub(this.cost())
+                setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+            },
+                                                            style() {
+                                                                                let data = tmp[this.layer].buyables[this.id]
+                    if (player.pl.points.lt(data.cost)) return {
+                            'border-color': 'gray',
+                            'background-color': '#181818',
+                            'color': 'white',
+                        }
+                    else return {
+                            'border-color': 'lightgreen',
+                            'background-color': '#181818',
+                            'color': 'white',
+                        }
+                },
+            effect(x) {
+                let base = new Decimal(1e57)
+                if (hasUpgrade("pl",45)) base = base.times(11)
+                if (hasUpgrade("pl",46)) base = base.times(76)
+                if (hasUpgrade("pl",47)) base = base.times(26)
+                if (hasUpgrade("pl",48)) base = base.times(11)
+                if (hasUpgrade("pl",49)) base = base.times(1001)
+                //100,200,60,1000%
+                let eff = base.mul(x)
+                return {eff: eff, base: base}},
+                unlocked() {return player.ec.buyables[11].gte(2)&&hasUpgrade('pl',36)},
         },
     },
     clickables: {
     11: {
         title: "<h3>Star Fusioner</h3>",
-        display() {return "Hold to get Stars. On hold you  get " + format(tmp.pl.base)+ " stars. (Every tick)."},
+        display() {return "Hold to get Stars. On hold you get " + format(tmp.pl.base)+ " stars. (Every tick)."},
         canClick() {return true},
         unlocked() {return true},
 onHold() {
@@ -841,12 +1295,9 @@ onHold() {
             },
         },
         update(diff) {
-    if (player.pl.buyables[11].gte(1))player.pl.points = player.pl.points.add(tmp.pl.gain.times(diff))
+    if (player.pl.buyables[11].gte(1))player.pl.points = player.pl.points.add(tmp.pl.gain.mul(hasUpgrade('pl',43)?20000:1).times(diff))
            
         },
     row: 0, // Row the layer is in on the tree (0 is the first row)
-    hotkeys: [
-        {key: "s", description: "S: Reset for stars", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
-    ],
     layerShown(){return true}
 })

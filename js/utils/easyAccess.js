@@ -73,3 +73,15 @@ function achievementEffect(layer, id) {
 function gridEffect(layer, id) {
 	return (gridRun(layer, 'getEffect', player[layer].grid[id], id))
 }
+function gridCost(layer, id) {
+	return (gridRun(layer, 'getCost', player[layer].grid[id], id))
+}
+function gridStartCost(layer, id) {
+	return (gridRun(layer, 'getStartCost', player[layer].grid[id], id))
+}
+function gridBgColor(layer, id) {
+	return (gridRun(layer, 'getBgColor', player[layer].grid[id], id))
+}
+function gridBdColor(layer, id) {
+	return (gridRun(layer, 'getBdColor', player[layer].grid[id], id))
+}

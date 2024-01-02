@@ -1,9 +1,9 @@
 let modInfo = {
-	name: "Event Tree - Planetary",
+	name: "Event Tree - ....tary",
 	id: "eventtree",
 	author: "seder3214",
 	pointsName: "points",
-	modFiles: ["layers/pl.js","layers/ec.js", "tree.js"],
+	modFiles: ["layers/pl.js","layers/ec.js","layers/bs.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -13,8 +13,8 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1",
-	name: "Expand - 1",
+	num: "0.1.5",
+	name: "Expand - 2: Final pt.1",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
