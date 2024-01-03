@@ -188,9 +188,6 @@ player.bs.total++}
     doReset(){
         layerDataReset('pl')
     },
-    update(diff) {
-        player.bs.points = player.bs.points.add(tmp.bs.gain.times(diff))
-    },
     row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "b", description: "b: Reset for booster points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
