@@ -183,7 +183,7 @@ player.bs.total++}
         getEffect(data, id) {
             let eff = new Decimal(1)
             let base = new Decimal(0.75)
-            if (player[this.layer].grid[id]>=1) eff = eff.mul(player[this.layer].grid[id]+1).pow(base).pow(((id%100))).pow(2*(Math.floor(id/100)))
+            if (player[this.layer].grid[id]>=1) eff = eff.mul(player[this.layer].grid[id]+1).pow(base).pow(id%100).pow(5*(Math.floor(id/100)))
             return eff
         },
         getDisplay(data, id) {
