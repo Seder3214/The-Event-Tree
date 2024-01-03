@@ -152,7 +152,7 @@ addLayer("bs", {
             return color
         },
         getCost(data,id) {
-            let b = new Decimal(3).pow(id/100+1+id%100).mul(1.73*player[this.layer].grid[id]**5).pow(id/100).pow(player.bs.grid[id]>=25?((player.bs.grid[id]-25)/10)+1:1).pow(player.bs.grid[id]>=50?((player.bs.grid[id]-50)/50)+1:1).pow(player.bs.grid[id]>=100?((player.bs.grid[id]-100)/100)+1:1)
+            let b = new Decimal(3).pow(id/100+1+id%100).mul(1.73*player[this.layer].grid[id]**10).pow(id/100).pow(player.bs.grid[id]>=25?((player.bs.grid[id]-25)/10)+1:1).pow(player.bs.grid[id]>=50?((player.bs.grid[id]-50)/50)+1:1).pow(player.bs.grid[id]>=100?((player.bs.grid[id]-100)/100)+1:1)
             return b
         },
         getStartCost(id) {
