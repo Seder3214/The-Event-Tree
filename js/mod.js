@@ -13,8 +13,8 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.5",
-	name: "Expand - 2: Final pt.1",
+	num: "0.2",
+	name: "Expand - 3: Boosters Event",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
@@ -50,12 +50,12 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
-'Endgame - 2 Expandation'
+'Endgame - Boosters Layer unlocked'
 ]
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.ec.buyables[11].gte(2)
+	return player.bs.unlocked
 }
 
 
