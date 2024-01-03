@@ -11,11 +11,11 @@ addLayer("bs", {
     }},
     branches: ['pl'],
     color: "#4f6925",
-    requires: new Decimal('1.8e308'), // Can be a function that takes requirement increases into account
+    requires: new Decimal('1.8e220'), // Can be a function that takes requirement increases into account
     resource: "booster points", // Name of prestige currency
     baseResource: "stars", // Name of resource prestige is based on
     baseAmount() {return player.pl.points}, // Get the current amount of baseResource
-    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.1, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
@@ -23,6 +23,30 @@ addLayer("bs", {
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
+    },
+    gain() {
+        let sum = new Decimal(0)
+        if (player.bs.grid[101]>=1) sum = sum.add(gridEffect('bs',101))
+        if (player.bs.grid[102]>=1) sum = sum.add(gridEffect('bs',102))
+        if (player.bs.grid[103]>=1) sum=sum.add( gridEffect('bs',103))
+        if (player.bs.grid[104]>=1) sum =sum.add( gridEffect('bs',104))
+        if (player.bs.grid[105]>=1) sum =sum.add( gridEffect('bs',105))
+        if (player.bs.grid[201]>=1) sum =sum.add( gridEffect('bs',201))
+        if (player.bs.grid[202]>=1) sum =sum.add( gridEffect('bs',202))
+        if (player.bs.grid[203]>=1) sum =sum.add( gridEffect('bs',203))
+        if (player.bs.grid[204]>=1) sum =sum.add( gridEffect('bs',204))
+        if (player.bs.grid[205]>=1) sum =sum.add( gridEffect('bs',205))
+        if (player.bs.grid[301]>=1) sum =sum.add( gridEffect('bs',301))
+        if (player.bs.grid[302]>=1) sum =sum.add( gridEffect('bs',302))
+        if (player.bs.grid[303]>=1) sum =sum.add( gridEffect('bs',303))
+        if (player.bs.grid[304]>=1) sum =sum.add( gridEffect('bs',304))
+        if (player.bs.grid[305]>=1) sum =sum.add( gridEffect('bs',305))
+        if (player.bs.grid[401]>=1) sum =sum.add( gridEffect('bs',401))
+        if (player.bs.grid[402]>=1) sum =sum.add( gridEffect('bs',402))
+        if (player.bs.grid[403]>=1) sum =sum.add( gridEffect('bs',403))
+        if (player.bs.grid[404]>=1) sum =sum.add( gridEffect('bs',404))
+        if (player.bs.grid[405]>=1) sum =sum.add( gridEffect('bs',405))
+        return sum
     },
     effect() {
         let power = new Decimal(0)
@@ -134,7 +158,7 @@ addLayer("bs", {
             return color
         },
         getCost(data,id) {
-            let b = new Decimal(3).pow(id/100+1+id%100).mul(1.73*player[this.layer].grid[id]**2).pow(id/100)
+            let b = new Decimal(3).pow(id/100+1+id%100).mul(1.73*player[this.layer].grid[id]**2).pow(id/100).pow(player.bs.grid[id]>=25?((player.bs.grid[id]-25)/10)+1:1).pow(player.bs.grid[id]>=50?((player.bs.grid[id]-50)/50)+1:1).pow(player.bs.grid[id]>=100?((player.bs.grid[id]-100)/100)+1:1)
             return b
         },
         getStartCost(id) {
@@ -166,9 +190,12 @@ addLayer("bs", {
     doReset(){
         layerDataReset('pl')
     },
+    update(diff) {
+        player.bs.points = player.bs.points.add(tmp.bs.gain.times(diff))
+    },
     row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "b", description: "b: Reset for booster points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return hasUpgrade('ec',13)||player[this.layer].unlocked}
+    layerShown(){return player.ec.buyables[11].gte(3)||player[this.layer].unlocked}
 })

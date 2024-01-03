@@ -12,7 +12,7 @@ addLayer("ec", {
     baseResource: "stars", // Name of resource prestige is based on
     baseAmount() {return player.pl.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 5.85, // Prestige currency exponent
+    exponent() {return 5.85}, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -45,7 +45,7 @@ addLayer("ec", {
             cost(x) {return new Decimal(1).mul(x.add(1)) },
             display() {
                     let data = tmp[this.layer].buyables[this.id]
-                    return "<h2><b>Expand Planetary Event</b></h2> <br>" + "Event Cofigurator allows you to modify events! Unlock more planets and upgrades per level. <br>Requirement: " + format(data.cost) + " Event Fragments <br>" + "Expandation: " + formatWhole(player[this.layer].buyables[this.id]) + "/6."},
+                    return "<h2><b>Expand Planetary Event</b></h2> <br>" + "Event Cofigurator allows you to modify events! Unlock more planets and upgrades per level. <br>Requirement: " + format(data.cost) + " Event Fragments <br>" + "Expandation: " + formatWhole(player[this.layer].buyables[this.id]) + "/3. At third expand, unlock new layer"},
             canAfford() { return player[this.layer].points.gte(this.cost()) },
             buy() {
                                 cost = tmp[this.layer].buyables[this.id].cost
@@ -106,6 +106,33 @@ addLayer("ec", {
             },
             style() {
             if (hasUpgrade("ec", 12)) return {
+                'border-color': '#343029',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.ec.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
+        13: {
+            title: "Planet Boost II",
+            description() {return "Get a 1e22% boost to stars gain."},
+            cost: new Decimal(3),
+           canAfford() {return player.ec.points.gte(3)},
+            unlocked() {return (hasUpgrade('ec',12))},
+            pay(){
+                return player.ec.points = player.ec.points
+            },
+            style() {
+            if (hasUpgrade("ec", 13)) return {
                 'border-color': '#343029',
                 'background-color': '#181818',
                 'color': 'white'
