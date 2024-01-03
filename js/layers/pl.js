@@ -1823,6 +1823,8 @@ onHold() {
         },
         update(diff) {
     if (player.pl.buyables[11].gte(1))player.pl.points = player.pl.points.add(tmp.pl.gain.mul(hasUpgrade('pl',43)?50000:1).times(diff))
+
+player.bs.points = player.bs.points.add(tmp.bs.gain.times(diff))
            
         },
     row: 0, // Row the layer is in on the tree (0 is the first row)
