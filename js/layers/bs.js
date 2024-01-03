@@ -162,7 +162,7 @@ addLayer("bs", {
             return b
         },
         getStartCost(id) {
-            let cost = new Decimal(1).mul(new Decimal(10).pow(player.bs.total.add(id%100+(5*(id/100 - 1)))))
+            let cost = new Decimal(1).mul(new Decimal(10).pow(player.bs.total.add(id%100+(5 *(Math.floor(id/100)-1)))))
             return cost
         },
         getUnlocked(id) { // Default
