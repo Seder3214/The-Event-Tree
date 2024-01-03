@@ -131,12 +131,6 @@ addLayer("bs", {
             
         },
         getStyle(data, id) {
-            
-            if (player.bs.points.gte(gridCost('bs',id)) && player.bs.grid[id]>0) return {
-                'background-color': gridBgColor('bs',id),
-                'border-color': gridBdColor('bs',id),
-                'color':'white',
-            }
             if (player.bs.grid[id]>0) return {
                 'background-color': gridBgColor('bs',id),
                 'border-color': gridBdColor('bs',id),
