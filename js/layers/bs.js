@@ -137,20 +137,6 @@ addLayer("bs", {
                 'color': 'white'
             }
         },
-        getBgColor(id) {
-            let color  = "#";
-            for (var i = 0; i < 6; i++) {
-                color += Math.floor(Math.random() * 10);
-            }
-            return color
-        },
-        getBdColor(id) {
-            let color  = "#";
-            for (var i = 0; i < 6; i++) {
-                color += Math.floor((Math.random() * 10)-30);
-            }
-            return color
-        },
         getCost(data,id) {
             let b = new Decimal(3).pow(id/100+1+id%100).mul(1.73*player[this.layer].grid[id]**(5+id%100)).pow(id/100).pow(player.bs.grid[id]>=25?((player.bs.grid[id]-25)/10)+1:1).pow(player.bs.grid[id]>=50?((player.bs.grid[id]-50)/50)+1:1).pow(player.bs.grid[id]>=100?((player.bs.grid[id]-100)/100)+1:1)
             return b
@@ -173,6 +159,20 @@ player.bs.points = player.bs.points.sub(gridCost('bs',id))}
 player.bs.points = player.bs.points.sub(gridStartCost('bs',id))
 player.bs.total++}
             player[this.layer].grid[id]++
+        getBgColor(id) {
+            let color  = "#";
+            for (var i = 0; i < 6; i++) {
+                color += Math.floor(Math.random() * 10);
+            }
+            return color
+        },
+        getBdColor(id) {
+            let color  = "#";
+            for (var i = 0; i < 6; i++) {
+                color += Math.floor((Math.random() * 10)-30);
+            }
+            return color
+        },
         },
         getEffect(data, id) {
             let eff = new Decimal(1)
