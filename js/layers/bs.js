@@ -152,14 +152,7 @@ return cost
             if (player.bs.grid[id]<1) return (player.bs.points.gte(gridStartCost('bs',id)))
             return (player.bs.points.gte(gridCost('bs',id)))
         },
-        onClick(data, id) { 
-if (player.bs.grid[id]>=1){
-player.bs.points = player.bs.points.sub(gridCost('bs',id))}
-            if (player.bs.grid[id]<1){
-player.bs.points = player.bs.points.sub(gridStartCost('bs',id))
-player.bs.total++}
-            player[this.layer].grid[id]++
-        getBgColor(id) {
+getBgColor(id) {
             let color  = "#";
             for (var i = 0; i < 6; i++) {
                 color += Math.floor(Math.random() * 10);
@@ -173,6 +166,13 @@ player.bs.total++}
             }
             return color
         },
+        onClick(data, id) { 
+if (player.bs.grid[id]>=1){
+player.bs.points = player.bs.points.sub(gridCost('bs',id))}
+            if (player.bs.grid[id]<1){
+player.bs.points = player.bs.points.sub(gridStartCost('bs',id))
+player.bs.total++}
+            player[this.layer].grid[id]++
         },
         getEffect(data, id) {
             let eff = new Decimal(1)
