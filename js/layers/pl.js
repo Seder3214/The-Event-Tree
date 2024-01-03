@@ -736,7 +736,7 @@ addLayer("pl", {
             title: "Explore Saturn' Ring A (1/7)",
             description() {return "Saturn 300% more efficient"},
             cost: new Decimal(2e34),
-            unlocked() {return player.pl.buyables[14].gte(1)},
+            unlocked() {return player.pl.buyables[15].gte(1)},
             style() {
             if (hasUpgrade("pl", 37)) return {
                 'border-color': 'lightgreen',
