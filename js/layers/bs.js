@@ -137,14 +137,14 @@ addLayer("bs", {
                 'color': 'white'
             }
         },
-        getBgColor() {
+        getBgColor(id) {
             let color  = "#";
             for (var i = 0; i < 6; i++) {
                 color += Math.floor(Math.random() * 10);
             }
             return color
         },
-        getBdColor() {
+        getBdColor(id) {
             let color  = "#";
             for (var i = 0; i < 6; i++) {
                 color += Math.floor((Math.random() * 10)-30);
