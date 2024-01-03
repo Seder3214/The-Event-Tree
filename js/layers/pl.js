@@ -788,7 +788,7 @@ addLayer("pl", {
             title: "Explore Saturn' Ring C (3/7)",
             description() {return "<h5>Boost Stars gain based on difference between stars gain when holding <b>Star Fusioner</b> and passive stars gain.(20x/sec)</h5>"},
             cost: new Decimal(2e37),
-            unlocked() {return hasUpgrade('pl',24)},
+            unlocked() {return hasUpgrade('pl',38)},
             effect() {
                 let eff = new Decimal(1)
                 eff = (tmp.pl.gain.mul(20)).div(tmp.pl.gain)
