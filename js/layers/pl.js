@@ -395,11 +395,7 @@ addLayer("pl", {
             cost: new Decimal(2.5e10),
             unlocked() {return hasUpgrade('pl',22)},
             style() {
-            if (hasUpgrade("pl", 23)) return {
-                'border-color': 'lightgreen',
-                'background-color': '#181818',
-                'color': 'white'
-            }
+   
             if (player.pl.points.gte(this.cost)) return {
                 'border-color': 'yellow',
                 'background-color': '#181818',
@@ -1469,7 +1465,7 @@ addLayer("pl", {
             },
                                                             style() {
                                                                                 let data = tmp[this.layer].buyables[this.id]
-                    if (hasUpgrade("pl", 35)) return {
+                    if (hasUpgrade("pl", 36)) return {
                     'border-color': 'red',
                     'background-color': '#181818',
                     'color': 'white'
