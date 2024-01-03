@@ -173,7 +173,11 @@ addLayer("bs", {
             return (player.bs.points.gte(gridCost('bs',id)))
         },
         onClick(data, id) { 
-            if (player.bs.grid[id]<1) player.bs.total++
+if (player.bs.grid[id]>=1){
+player.bs.points = player.bs.points.sub(gridCost('bs',id))}
+            if (player.bs.grid[id]<1){
+player.bs.points = player.bs.points.sub(gridStartCost('bs',id))
+player.bs.total++}
             player[this.layer].grid[id]++
         },
         getEffect(data, id) {
