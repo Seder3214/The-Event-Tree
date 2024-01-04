@@ -50,7 +50,7 @@ tooltip() {return format(player.ec.boosterPoints)+"  Bosster Points"},
             "blank",
 			"buyables",
             "blank",
-            ["display-text", "Current Boosters Power is <h2 style='color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;'>"+format(tmp.bs.effect)+"</h2>"],
+            ["display-text", "Current Boosters Power is <h2 style='color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;'>"+format(getBoosterEff())+"</h2>"],
             "grid",
 			]
         ]
