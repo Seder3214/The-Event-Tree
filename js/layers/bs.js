@@ -126,26 +126,26 @@ return cost
             return true
         },
         getCanClick(data, id) {
-            if (player.bs.grid[id]<1) return (player.ec.bposterPoints.gte(gridStartCost('bs',id)))
-            return (player.ec.bposterPoints.gte(gridCost('bs',id)))
+            if (player.bs.grid[id]<1) return (player.ec.boosterPoints.gte(gridStartCost('bs',id)))
+            return (player.ec.boosterPoints.gte(gridCost('bs',id)))
         },
         onClick(data, id) { 
 
 gridBgColor('bs',id)
 gridBdColor('bs',id)
 if (player.bs.grid[id]>=1){
-player.ec.bposterPoints = player.ec.bposterPoints.sub(gridCost('bs',id))}
+player.ec.boosterPoints = player.ec.boosterPoints.sub(gridCost('bs',id))}
             if (player.bs.grid[id]<1){
-player.ec.bposterPoints = player.ec.bposterPoints.sub(gridStartCost('bs',id))
+player.ec.boosterPoints = player.ec.boosterPoints.sub(gridStartCost('bs',id))
 player.bs.total++}
             player[this.layer].grid[id]++
         },
 
 onHold(data, id) { 
 if (player.bs.grid[id]>=1){
-player.ec.bposterPoints = player.ec.bposterPoints.sub(gridCost('bs',id))}
+player.ec.boosterPoints = player.ec.boosterPoints.sub(gridCost('bs',id))}
             if (player.bs.grid[id]<1){
-player.ec.bposterPoints = player.ec.bposterPoints.sub(gridStartCost('bs',id))
+player.ec.boosterPoints = player.ec.boosterPoints.sub(gridStartCost('bs',id))
 player.bs.total++}
             player[this.layer].grid[id]++
         },
