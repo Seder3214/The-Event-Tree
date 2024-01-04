@@ -147,7 +147,7 @@ return color
         },
         getStartCost(data,id) {
 let rowBoost = Math.floor(id/100)
-            let cost = new Decimal(10).pow(new Decimal(id%100).sub(1).mul(4.5).add(new Decimal(10).mul(new Decimal(id/100).floor().sub(1)))).mul(new Decimal(1e25).mul(new Decimal(id/100).floor().sub(1)).max(1))
+            let cost = new Decimal(10).pow(new Decimal(id%100).sub(1).mul(4.5).add(new Decimal(20).mul(new Decimal(id/100).floor().sub(1)))).mul(new Decimal(1e25).mul(new Decimal(id/100).floor().sub(1)).max(1))
             if (id%100<=2 && id/100<2) cost = new Decimal(1).mul(1000**((id%100)-1))
 return cost
         },
