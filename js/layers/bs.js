@@ -185,8 +185,8 @@ player.bs.total++}
         getEffect(data, id) {
             let eff = new Decimal(1)
             let base = new Decimal(1)
-            if (player[this.layer].grid[id]>=1) eff = eff.mul(player[this.layer].grid[id]+1).pow(base).pow((id%100)+(new Decimal(5).mul(Math.floor(id/100)-1)).pow(player.bs.grid[id]>=10?1+(player.bs.grid[id]-9)/100:1))
-            return eff
+            if (player[this.layer].grid[id]>=1) eff = eff.mul(player[this.layer].grid[id]+1).pow((id%100)+(new Decimal(5).mul(Math.floor(id/100)-1)).pow(player.bs.grid[id]>=10?1+(player.bs.grid[id]-9)/1000:1)).pow(base).mul(new Decimal(1e7).pow(Math.floor(id/100)-1))        
+return eff
         },
         getDisplay(data, id) {
             if (player[this.layer].grid[id]>=1) return 'Tier '+format(player[this.layer].grid[id])+".<br><h5>Adds +"+format(gridEffect('bs', id))+' to Booster Points gain/s.<br>Cost to tier up: '+format(gridCost('bs',id))+" booster points"
