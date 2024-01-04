@@ -58,7 +58,7 @@ addLayer("bs", {
             display() {
                     let data = tmp[this.layer].buyables[this.id]
                     return "<h2><b>Add one more row of boosters</b></h2> <br>" + "With power of boosters, you can craft more of them! <br>Requirement: " + format(data.cost) + " Booster Points <br>" + "Addition: +" + formatWhole(player[this.layer].buyables[this.id]) + "/6 rows."},
-            canAfford() { return player[this.layer].points.gte(this.cost()) },
+            canAfford() { return player.ec.booaterPoints.gte(this.cost()) },
             buy() {
                                 cost = tmp[this.layer].buyables[this.id].cost
                 setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
@@ -102,7 +102,7 @@ getBgColor(data,id) {
         },      
  getStyle(data, id) {
 
-            if (player[this.layer].points.lte(gridStartCost('bs',id))&& player.bs.grid[id]<1) return {
+            if (player.ec.boosterPoints.lte(gridStartCost('bs',id))&& player.bs.grid[id]<1) return {
                 'background-color': 'gray',
                 'border-color': 'gray',
                 'color': 'black'
@@ -126,26 +126,26 @@ return cost
             return true
         },
         getCanClick(data, id) {
-            if (player.bs.grid[id]<1) return (player[this.layer].points.gte(gridStartCost('bs',id)))
-            return (player[this.layer].points.gte(gridCost('bs',id)))
+            if (player.bs.grid[id]<1) return (player.ec.bposterPoints.gte(gridStartCost('bs',id)))
+            return (player.ec.bposterPoints.gte(gridCost('bs',id)))
         },
         onClick(data, id) { 
 
 gridBgColor('bs',id)
 gridBdColor('bs',id)
 if (player.bs.grid[id]>=1){
-player[this.layer].points = player[this.layer].points.sub(gridCost('bs',id))}
+player.ec.bposterPoints = player.ec.bposterPoints.sub(gridCost('bs',id))}
             if (player.bs.grid[id]<1){
-player[this.layer].points = player[this.layer].points.sub(gridStartCost('bs',id))
+player.ec.bposterPoints = player.ec.bposterPoints.sub(gridStartCost('bs',id))
 player.bs.total++}
             player[this.layer].grid[id]++
         },
 
 onHold(data, id) { 
 if (player.bs.grid[id]>=1){
-player[this.layer].points = player[this.layer].points.sub(gridCost('bs',id))}
+player.ec.bposterPoints = player.ec.bposterPoints.sub(gridCost('bs',id))}
             if (player.bs.grid[id]<1){
-player[this.layer].points = player[this.layer].points.sub(gridStartCost('bs',id))
+player.ec.bposterPoints = player.ec.bposterPoints.sub(gridStartCost('bs',id))
 player.bs.total++}
             player[this.layer].grid[id]++
         },
@@ -164,8 +164,6 @@ return eff
     doReset(){
         layerDataReset('pl')
     },
-update(diff) {
-player.bs.points = player.bs.points.add(getBoosterEff())},
     row: 1, // Row the layer is in on the tree (0 is the first row)
 
     hotkeys: [
