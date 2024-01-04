@@ -91,7 +91,8 @@ addLayer("bs", {
     tabFormat: {
         "Main": {
         content:[
-            function() {if (player.tab == "bs") return "main-display"
+            function() {if (player.tab == "bs") return 
+["display-text", "You have <h2 style='color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;'>"+format(player.ec.boosterPoints)+"</h2>"]
 },
             function() { if (player.tab == "bs")  return ["column", [
             player.bs.unlocked && player.bs.best.gte(1)?'':'prestige-button',
@@ -100,7 +101,7 @@ addLayer("bs", {
             "blank",
 			"buyables",
             "blank",
-            ["display-text", "Current Boosters Power is <h2 style='color: rgb(52, 48, 41); text-shadow: rgb(52, 48, 41) 0px 0px 10px;'>"+format(tmp.bs.effect)+"</h2>"],
+            ["display-text", "Current Boosters Power is <h2 style='color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;'>"+format(tmp.bs.effect)+"</h2>"],
             "grid",
 			]
         ]
