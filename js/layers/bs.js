@@ -77,10 +77,9 @@ addLayer("bs", {
     tabFormat: {
         "Main": {
         content:[
-            function() {if (player.tab == "bs") return 
-["display-text", "You have <h2 style='color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;'>"+format(player.ec.boosterPoints)+"</h2>"]
-},
             function() { if (player.tab == "bs")  return ["column", [
+
+["display-text", "You have <h2 style='color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;'>"+format(player.ec.boosterPoints)+" booster points</h2>"],
             player.bs.unlocked && player.bs.best.gte(1)?'':'prestige-button',
             "blank",
             ["display-text", "<i style='color: grey'>You have unlocked <b>Boosters Event</b></i> <br><i>Craft Boosters and get more boost!</i><hr>"],
