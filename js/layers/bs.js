@@ -2,7 +2,7 @@
 	function getBoosterEff() {
   let boost=new Decimal(1)
   for(var i in player.bs.grid) {
-    if (new Decimal(getGridData("bs", i)).gt(0)) boost=boost.mul(layers.bs.grid.getEffect(new Decimal(getGridData("bs", i)), i))
+    if (new Decimal(getGridData("bs", i)).gt(0)) boost=boost.add(layers.bs.grid.getEffect(new Decimal(getGridData("bs", i)), i))
   }
   return boost
 }
@@ -153,12 +153,12 @@ player.bs.total++}
         getEffect(data, id) {
             let eff = new Decimal(1.75)
             let base = new Decimal(0.8)
-            if (player[this.layer].grid[id]>=1) eff = eff.pow(player[this.layer].grid[id]+1).pow(base).mul(1.36*(id%100)).mul(new Decimal(2).pow(Math.floor(id/100)-1))
+            if (player[this.layer].grid[id]>=1) eff = eff.pow(player[this.layer].grid[id]+1).pow(base).mul(10*(id%100)).mul(new Decimal(100).pow(Math.floor(id/100)-1))
 
 return eff
         },
         getDisplay(data, id) {
-            if (player[this.layer].grid[id]>=1) return 'Tier '+format(player[this.layer].grid[id])+".<br><h5>Boost booster points gain by  "+format(gridEffect('bs', id))+'x<br>Cost to tier up: '+format(gridCost('bs',id))+" booster points"
+            if (player[this.layer].grid[id]>=1) return 'Tier '+format(player[this.layer].grid[id])+".<br><h5>Adds + "+format(gridEffect('bs', id))+' to Boosters Power. <br>Cost to tier up: '+format(gridCost('bs',id))+" booster points"
             else return '<h5>Empty Slot. Craft a booster to proceed.<br>Cost to craft: '+format(gridStartCost('bs',id))+" booster points</h5>"
         },
     },
