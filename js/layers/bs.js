@@ -185,9 +185,6 @@ player.bs.total++}
         },
 
 onHold(data, id) { 
-
-gridBgColor('bs',id)
-gridBdColor('bs',id)
 if (player.bs.grid[id]>=1){
 player.ec.booaterPoints = player.ec.boosterPoints.sub(gridCost('bs',id))}
             if (player.bs.grid[id]<1){
