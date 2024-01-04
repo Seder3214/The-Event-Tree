@@ -153,6 +153,7 @@ boosterPoints: new Decimal(0),
     },
     doReset(){
         layerDataReset('pl')
+player.ec.boosterPoints = player.ec.boosterPoints.add(1)
     },
 update(diff) {
 player.ec.boosterPoints = player.ec.boosterPoints.add(getBoosterEff())},
