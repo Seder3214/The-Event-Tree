@@ -1,4 +1,4 @@
-fucntion getBgColor() {
+function getBgColor() {
             let color  = "#";
             for (var i = 0; i < 6; i++) {
                 color += Math.floor(Math.random() * 10);
