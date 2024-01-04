@@ -26,7 +26,7 @@ tooltip() {return format(player.ec.boosterPoints)+"  Bosster Points"},
         return new Decimal(1)
     },
     gain() {
-        let sum = new Decimal(0)
+        let sum = new Decimal(1)
         if (player.bs.grid[101]>=1) sum = sum.mul(gridEffect('bs',101))
         if (player.bs.grid[102]>=1) sum = sum.mul(gridEffect('bs',102))
         if (player.bs.grid[103]>=1) sum=sum.mul( gridEffect('bs',103))
