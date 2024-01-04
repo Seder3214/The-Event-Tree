@@ -176,8 +176,8 @@ return cost
         },
         onClick(data, id) { 
 
-getBgColor()
-getBdColor()
+getBgColor(id)
+getBdColor(id)
 if (player.bs.grid[id]>=1){
 player.bs.points = player.bs.points.sub(gridCost('bs',id))}
             if (player.bs.grid[id]<1){
