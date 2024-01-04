@@ -168,11 +168,10 @@ return eff
         },
     },
 update(diff) {
-player.ec.boosterPoints = player
-ec.boosterPoints.add(getBoosterEff().times(diff))},
+player.ec.boosterPoints = player.ec.boosterPoints.add(getBoosterEff().times(diff))},
     doReset(){
         layerDataReset('pl')
- player.bs.points = player.bs.points.add(1)
+ player.ec.boosterPoints = player.ec.boosterPoints.add(1)
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
