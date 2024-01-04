@@ -183,6 +183,18 @@ player.ec.boosterPoints = player.ec.boosterPoints.sub(gridStartCost('bs',id))
 player.bs.total++}
             player[this.layer].grid[id]++
         },
+
+onHold(data, id) { 
+
+gridBgColor('bs',id)
+gridBdColor('bs',id)
+if (player.bs.grid[id]>=1){
+player.ec.booaterPoints = player.ec.boosterPoints.sub(gridCost('bs',id))}
+            if (player.bs.grid[id]<1){
+player.ec.boosterPoints = player.ec.boosterPoints.sub(gridStartCost('bs',id))
+player.bs.total++}
+            player[this.layer].grid[id]++
+        },
         getEffect(data, id) {
             let eff = new Decimal(1.75)
             let base = new Decimal(0.35)
