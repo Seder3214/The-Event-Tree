@@ -31,29 +31,16 @@ tooltip() {return format(player.ec.boosterPoints)+"  Bosster Points"},
         return sum
     },
     effect() {
-        let power = new Decimal(0)
-        let sum = new Decimal(0)
-        if (player.bs.grid[101]>=1) sum = sum.add(gridEffect('bs',101))
-        if (player.bs.grid[102]>=1) sum = sum.add(gridEffect('bs',102))
-        if (player.bs.grid[103]>=1) sum=sum.add( gridEffect('bs',103))
-        if (player.bs.grid[104]>=1) sum =sum.add( gridEffect('bs',104))
-        if (player.bs.grid[105]>=1) sum =sum.add( gridEffect('bs',105))
-        if (player.bs.grid[201]>=1) sum =sum.add( gridEffect('bs',201))
-        if (player.bs.grid[202]>=1) sum =sum.add( gridEffect('bs',202))
-        if (player.bs.grid[203]>=1) sum =sum.add( gridEffect('bs',203))
-        if (player.bs.grid[204]>=1) sum =sum.add( gridEffect('bs',204))
-        if (player.bs.grid[205]>=1) sum =sum.add( gridEffect('bs',205))
-        if (player.bs.grid[301]>=1) sum =sum.add( gridEffect('bs',301))
-        if (player.bs.grid[302]>=1) sum =sum.add( gridEffect('bs',302))
-        if (player.bs.grid[303]>=1) sum =sum.add( gridEffect('bs',303))
-        if (player.bs.grid[304]>=1) sum =sum.add( gridEffect('bs',304))
-        if (player.bs.grid[305]>=1) sum =sum.add( gridEffect('bs',305))
-        if (player.bs.grid[401]>=1) sum =sum.add( gridEffect('bs',401))
-        if (player.bs.grid[402]>=1) sum =sum.add( gridEffect('bs',402))
-        if (player.bs.grid[403]>=1) sum =sum.add( gridEffect('bs',403))
-        if (player.bs.grid[404]>=1) sum =sum.add( gridEffect('bs',404))
-        if (player.bs.grid[405]>=1) sum =sum.add( gridEffect('bs',405))
-        return sum
+let row1 = new Decimal(1)
+        let row2 = new Decimal(1)
+let sum = new Decimal(1)
+        let row3 = new Decimal(1)
+let row4 = new Decimal(1)
+        row1 =row1.mul(gridEffect('bs',101)).mul(gridEffect('bs',102)).mul(gridEffect('bs',103)).mul(gridEffect('bs',104)).mul(gridEffect('bs',105))
+row2 =row2.mul(gridEffect('bs',201)).mul(gridEffect('bs',202)).mul(gridEffect('bs',203)).mul(gridEffect('bs',204)).mul(gridEffect('bs',205))
+row3 =row3.mul(gridEffect('bs',301)).mul(gridEffect('bs',302)).mul(gridEffect('bs',303)).mul(gridEffect('bs',304)).mul(gridEffect('bs',305))
+row4 =row4.mul(gridEffect('bs',401)).mul(gridEffect('bs',402)).mul(gridEffect('bs',403)).mul(gridEffect('bs',404)).mul(gridEffect('bs',405))
+ return sum = row1.mul(row2).mul(row3).mul(row4)
     },
     tabFormat: {
         "Main": {
