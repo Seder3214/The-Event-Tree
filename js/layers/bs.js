@@ -169,7 +169,7 @@ return eff
     },
 update(diff) {
 player.ec.boosterPoints = player
-ec.boosterPoints.add(getBoosterEff().times(diff)},
+ec.boosterPoints.add(getBoosterEff().times(diff))},
     doReset(){
         layerDataReset('pl')
  player.bs.points = player.bs.points.add(1)
