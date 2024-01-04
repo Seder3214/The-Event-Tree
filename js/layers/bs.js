@@ -4,7 +4,7 @@ fucntion getBgColor() {
                 color += Math.floor(Math.random() * 10);
             }
             return color
-        },
+        }
       function getBdColor() {
             let color  = "#";
             for (var i = 0; i < 6; i++) {
