@@ -1,5 +1,5 @@
 let modInfo = {
-	name: "Event Tree - ....tary",
+	name: "Event Tree - Boostery",
 	id: "eventtree",
 	author: "seder3214",
 	pointsName: "points",
@@ -13,12 +13,12 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.2",
-	name: "Expand - 3: Boosters Event",
+	num: "re: 0.2",
+	name: "Boosters Event!",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.2</h3><br>`
+	<h3>re: v0.2</h3><br>`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -50,12 +50,12 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
-'Endgame - Boosters Layer unlocked'
+'Endgame - 4 Event Fragments'
 ]
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.bs.unlocked == true
+	return player.ec.points.gte(4)
 }
 
 

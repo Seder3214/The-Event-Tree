@@ -94,7 +94,16 @@ td {
 	visibility: hidden;
 	height: 50px !important;
 }
-
+#stats {
+    height: 70px;
+    text-align: center;
+    display: flex;
+    width: 470px;
+    justify-self: center;
+    border: 2px solid;
+    border-color: white;
+    flex-wrap: wrap;
+}
 .canvas {
 	top: 0;
 	left: 0;

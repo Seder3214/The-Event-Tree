@@ -82,6 +82,3 @@ function gridStartCost(layer, id) {
 function gridBgColor(layer, id) {
 	return (gridRun(layer, 'getBgColor', player[layer].grid[id], id))
 }
-function gridBdColor(layer, id) {
-	return (gridRun(layer, 'getBdColor', player[layer].grid[id], id))
-}

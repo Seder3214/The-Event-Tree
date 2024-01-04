@@ -1,11 +1,3 @@
-
-	function getBoosterEff() {
-  let boost=new Decimal(1)
-  for(var i in player.bs.grid) {
-    if (new Decimal(getGridData("bs", i)).gt(0)) boost=boost.add(layers.bs.grid.getEffect(new Decimal(getGridData("bs", i)), i))
-  }
-  return boost
-}
 addLayer("bs", {
     name: "Boosters Event", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "BS", // This appears on the layer's node. Default is the id with the first letter capitalized
@@ -24,7 +16,7 @@ addLayer("bs", {
     baseResource: "stars", // Name of resource prestige is based on
     baseAmount() {return player.pl.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 10, // Prestige currency exponent
+    exponent: 0.1, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -37,14 +29,14 @@ addLayer("bs", {
         content:[
             function() { if (player.tab == "bs")  return ["column", [
 
-["display-text", "You have <h2 style='color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;'>"+format(player.ec.boosterPoints)+"</h2> booster points"],
+["display-text", "You have <h2 style='color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;'>"+format(player.bs.points)+"</h2> booster points"],
             player.bs.unlocked && player.bs.best.gte(1)?'':'prestige-button',
             "blank",
             ["display-text", "<i style='color: grey'>You have unlocked <b>Boosters Event</b></i> <br><i>Craft Boosters and get more boost!</i><hr>"],
             "blank",
 			"buyables",
             "blank",
-            ["display-text", "Current Boosters Power is <h2 style='color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;'>"+format(getBoosterEff())+"</h2>"],
+            ["display-text", "Current Boosters Power is <h2 style='color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;'>"+format(tmp.bs.getBoosterEff)+"</h2>"],
             "grid",
 			]
         ]
@@ -52,20 +44,54 @@ addLayer("bs", {
  ]
         },
     },
+    getBoosterEff() {
+        let boost=new Decimal(1)
+        for(var i in player.bs.grid) {
+          if (new Decimal(getGridData("bs", i)).gt(0)) boost=boost.mul(gridEffect('bs',i))
+        }
+        return boost
+      },
     buyables: {
         11: {
-            cost(x) {return new Decimal(1e7).pow(x.add(1)) },
+            cost(x) {return new Decimal(1e10).pow(x.add(1)) },
+            purchaseLimit: new Decimal(4),
             display() {
                     let data = tmp[this.layer].buyables[this.id]
-                    return "<h2><b>Add one more row of boosters</b></h2> <br>" + "With power of boosters, you can craft more of them! <br>Requirement: " + format(data.cost) + " Booster Points <br>" + "Addition: +" + formatWhole(player[this.layer].buyables[this.id]) + "/6 rows."},
-            canAfford() { return player.ec.boosterPoints.gte(this.cost()) },
+                    return "<h2><b>Add one more row of boosters</b></h2> <br>" + "With power of boosters, you can craft more of them! <br>Requirement: " + format(data.cost) + " Booster Points <br>" + "Addition: +" + formatWhole(player[this.layer].buyables[this.id]) + "/4 rows."},
+            canAfford() { return player.bs.points.gte(this.cost()) },
             buy() {
                                 cost = tmp[this.layer].buyables[this.id].cost
                 setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
             },
                                                             style() {
                                                                                 let data = tmp[this.layer].buyables[this.id]
-                    if (player.ec.boosterPoints.lt(data.cost)) return {
+                    if (player.bs.points.lt(data.cost)) return {
+                            'border-color': 'gray',
+                            'background-color': '#181818',
+                            'color': 'white',
+                        }
+                    else return {
+                            'border-color': '#343029',
+                            'background-color': '#181818',
+                            'color': 'white',
+                        }
+                },
+                unlocked() {return true},
+        },
+        12: {
+            cost(x) {return new Decimal(1e15).pow(x.add(1)) },
+            purchaseLimit: new Decimal(5),
+            display() {
+                    let data = tmp[this.layer].buyables[this.id]
+                    return "<h2><b>Add one more column of boosters</b></h2> <br>" + "With power of boosters, you can craft more of them! <br>Requirement: " + format(data.cost) + " Booster Points <br>" + "Addition: +" + formatWhole(player[this.layer].buyables[this.id]) + "/5 columns."},
+            canAfford() { return player.bs.points.gte(this.cost()) },
+            buy() {
+                                cost = tmp[this.layer].buyables[this.id].cost
+                setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+            },
+                                                            style() {
+                                                                                let data = tmp[this.layer].buyables[this.id]
+                    if (player.bs.points.lt(data.cost)) return {
                             'border-color': 'gray',
                             'background-color': '#181818',
                             'color': 'white',
@@ -80,82 +106,96 @@ addLayer("bs", {
         },
     },
     grid: {
-        rows: 4, // If these are dynamic make sure to have a max value as well!
-        cols: 5,
+        cols() {let num = 3
+            num += player.bs.buyables[12].toNumber()
+            return num},
+            maxCols: 7,
+        rows() {let rows = 1
+        rows += player.bs.buyables[11].toNumber()
+        return rows},
+        maxRows: 7, // If these are dynamic make sure to have a max value as well!
         getStartData(id) {
             return 0
         },
 
-getBgColor(data,id) {
-            let color  = "#";
+getBgColor(id) {
+            let color = "#";
             for (var i = 0; i < 6; i++) {
                 color += Math.floor(Math.random() * 10);
             }
-            return color
-        },
-      getBdColor(data,id) {
-            let color  = "#";
-            for (var i = 0; i < 6; i++) {
-                color += Math.floor((Math.random() * 10)-30);
-            }
-            return color
-        },      
+return color
+        },   
  getStyle(data, id) {
-
-            if (player.ec.boosterPoints.lte(gridStartCost('bs',id))&& player.bs.grid[id]<1) return {
+            if (player.bs.grid[id]<1) return {
+                'width':'85px',
+                'height':'85px',
                 'background-color': 'gray',
-                'border-color': 'gray',
+                'border-color': 'dark gray',
                 'color': 'black'
             }
-            else return {
+             return {
                 'background-color': gridBgColor('bs',id),
-                'border-color': gridBdColor('bs',id),
+                'border-color': '',
+                'width':'85px',
+                'height':'85px',
                 'color': 'white'
             }
         },
         getCost(data,id) {
-            let b = new Decimal(3).pow(id/100+1+id%100).mul(1.73*player[this.layer].grid[id]**(5+id%100)).pow(id/100).pow(player.bs.grid[id]>=25?((player.bs.grid[id]-25)/10)+1:1).pow(player.bs.grid[id]>=50?((player.bs.grid[id]-50)/50)+1:1).pow(player.bs.grid[id]>=100?((player.bs.grid[id]-100)/100)+1:1)
+            let b = gridStartCost('bs',id).add(2).pow(player.bs.grid[id]).add(10).mul(id/100).pow(player.bs.grid[id]>=10?1+(player.bs.grid[id]-9)/50:1)
             return b
         },
         getStartCost(data,id) {
-let rowBoost = Math.floor((id/100))
-            let cost = new Decimal(1).mul(new Decimal(10).pow(player.bs.total).pow((1+(id%100))+5*(rowBoost-1)))      
+let rowBoost = Math.floor(id/100)
+            let cost = new Decimal(10).pow(new Decimal(id%100).sub(1).mul(4.5).add(new Decimal(10).mul(new Decimal(id/100).floor().sub(1)))).mul(new Decimal(1e25).mul(new Decimal(id/100).floor().sub(1)).max(1))
+            if (id%100<=2 && id/100<2) cost = new Decimal(1).mul(1000**((id%100)-1))
 return cost
         },
         getUnlocked(id) { // Default
             return true
         },
         getCanClick(data, id) {
-            if (player.bs.grid[id]<1) return (player.ec.boosterPoints.gte(gridStartCost('bs',id)))
-            return (player.ec.boosterPoints.gte(gridCost('bs',id)))
+            return true
         },
         onClick(data, id) { 
-
-gridBgColor('bs',id)
-gridBdColor('bs',id)
-if (player.bs.grid[id]>=1){
-player.ec.boosterPoints = player.ec.boosterPoints.sub(gridCost('bs',id))}
-            if (player.bs.grid[id]<1){
-player.ec.boosterPoints = player.ec.boosterPoints.sub(gridStartCost('bs',id))
+            gridBgColor('bs',id)
+if (player.bs.grid[id]>=1 && player.bs.points.gte(gridCost('bs',id))){
+player.bs.points = player.bs.points.sub(gridCost('bs',id))
+player[this.layer].grid[id]++
+}
+            if (player.bs.grid[id]<1&& player.bs.points.gte(gridStartCost('bs',id))){
+player.bs.points = player.bs.points.sub(gridStartCost('bs',id))
+player[this.layer].grid[id]++
 player.bs.total++}
-            player[this.layer].grid[id]++
         },
+        onHold(data, id) { 
+            if (player.bs.grid[id]>=1 && player.bs.points.gte(gridCost('bs',id))){
+                player.bs.points = player.bs.points.sub(gridCost('bs',id))
+                player[this.layer].grid[id]++
+                }
+                            if (player.bs.grid[id]<1&& player.bs.points.gte(gridStartCost('bs',id))){
+                player.bs.points = player.bs.points.sub(gridStartCost('bs',id))
+                player[this.layer].grid[id]++
+                player.bs.total++}
+                    },
         getEffect(data, id) {
             let eff = new Decimal(1.75)
-            let base = new Decimal(0.8)
-            if (player[this.layer].grid[id]>=1) eff = eff.pow(player[this.layer].grid[id]+1).pow(base).mul(10*(id%100)).mul(new Decimal(100).pow(Math.floor(id/100)-1))
+            let base = new Decimal(0.6)
+            if (player[this.layer].grid[id]>=1) eff = eff.pow(player[this.layer].grid[id]+1).pow(base).mul(new Decimal(100).pow(Math.floor(id/100)-1)).mul(new Decimal(15).mul((id%100))).mul(player.bs.grid[id]>=10?10:1)
 
 return eff
         },
         getDisplay(data, id) {
-            if (player[this.layer].grid[id]>=1) return 'Tier '+format(player[this.layer].grid[id])+".<br><h5>Adds + "+format(gridEffect('bs', id))+' to Boosters Power. <br>Cost to tier up: '+format(gridCost('bs',id))+" booster points"
+            if (player[this.layer].grid[id]>=1) return 'Tier '+format(player[this.layer].grid[id])+".<br><h5>Boost booster points gain by "+format(gridEffect('bs', id))+'x. <br>Cost to tier up: '+format(gridCost('bs',id))+" booster points</h5>"
             else return '<h5>Empty Slot. Craft a booster to proceed.<br>Cost to craft: '+format(gridStartCost('bs',id))+" booster points</h5>"
         },
     },
+    
     doReset(){
         layerDataReset('pl')
-player.ec.boosterPoints = player.ec.boosterPoints.add(1)
     },
+    update(diff) {
+       if (player.bs.grid[101]>=1) player.bs.points = player.bs.points.add(tmp.bs.getBoosterEff.times(diff))},
     row: 1, // Row the layer is in on the tree (0 is the first row)
 
     hotkeys: [
