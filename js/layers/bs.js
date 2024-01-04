@@ -27,7 +27,7 @@ tooltip() {return format(player.ec.boosterPoints)+"  Bosster Points"},
     },
     gain() {
         let sum = new Decimal(1)
-        sum = sum.mul(tmp.bs.effect)
+        sum = sum.add(tmp.bs.effect)
         return sum
     },
     effect() {
