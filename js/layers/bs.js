@@ -23,11 +23,10 @@ addLayer("bs", {
     resource: "booster points", // Name of prestige currency
     baseResource: "stars", // Name of resource prestige is based on
     baseAmount() {return player.pl.points}, // Get the current amount of baseResource
-    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.01, // Prestige currency exponent
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 10, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
-if (player.bs.grid[101]>=1) mult = mult.mul(getBoosterEff())
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -165,10 +164,10 @@ return eff
     doReset(){
         layerDataReset('pl')
     },
-passiveGeneration() {
-if (player.bs.best.gte(1)) return 1
-else return 0},
+update(diff) {
+player.bs.points = player.bs.points.add(getBoosterEff())},
     row: 1, // Row the layer is in on the tree (0 is the first row)
+
     hotkeys: [
         {key: "b", description: "b: Reset for booster points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
