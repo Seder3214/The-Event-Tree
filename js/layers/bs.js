@@ -145,9 +145,17 @@ addLayer("bs", {
             
         },
         getStyle(data, id) {
-            if (player.bs.grid[id]>0) return {
-                'background-color': getBgColor(id),
-                'border-color': getBdColor(id),
+let color = getBgColor(id)
+let color2 = getBdColor(id)
+
+            if (player.bs.points.lte(getStartCost('bs',id)&& player.bs.grid[id]<0 return {
+                'background-color': gray,
+                'border-color': gray,
+                'color': 'black'
+            }
+            else return {
+                'background-color': color,
+                'border-color': color2,
                 'color': 'white'
             }
         },
@@ -168,6 +176,9 @@ return cost
             return (player.bs.points.gte(gridCost('bs',id)))
         },
         onClick(data, id) { 
+
+getBgColor(id)
+getBdColor(id)
 if (player.bs.grid[id]>=1){
 player.bs.points = player.bs.points.sub(gridCost('bs',id))}
             if (player.bs.grid[id]<1){
