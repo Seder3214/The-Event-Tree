@@ -53,7 +53,7 @@ tooltip() {return format(player.ec.boosterPoints)+"  Bosster Points"},
         if (player.bs.grid[403]>=1) sum =sum.add( gridEffect('bs',403))
         if (player.bs.grid[404]>=1) sum =sum.add( gridEffect('bs',404))
         if (player.bs.grid[405]>=1) sum =sum.add( gridEffect('bs',405))
-        return power
+        return sum
     },
     tabFormat: {
         "Main": {
