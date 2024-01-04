@@ -1,17 +1,3 @@
-function getBgColor(id) {
-            let color  = "#";
-            for (var i = 0; i < 6; i++) {
-                color += Math.floor(Math.random() * 10);
-            }
-            return color
-        }
-      function getBdColor(id) {
-            let color  = "#";
-            for (var i = 0; i < 6; i++) {
-                color += Math.floor((Math.random() * 10)-30);
-            }
-            return color
-        }
 addLayer("bs", {
     name: "Boosters Event", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "BS", // This appears on the layer's node. Default is the id with the first letter capitalized
@@ -142,10 +128,22 @@ addLayer("bs", {
         getStartData(id) {
             return 0
         },
-        gridColor(data,id) {
-            
+
+getBgColor(data,id) {
+            let color  = "#";
+            for (var i = 0; i < 6; i++) {
+                color += Math.floor(Math.random() * 10);
+            }
+            return color
         },
-        getStyle(data, id) {
+      getBdColor(data,id) {
+            let color  = "#";
+            for (var i = 0; i < 6; i++) {
+                color += Math.floor((Math.random() * 10)-30);
+            }
+            return color
+        },      
+ getStyle(data, id) {
 
             if (player.bs.points.lte(gridStartCost('bs',id))&& player.bs.grid[id]<1) return {
                 'background-color': 'gray',
@@ -153,8 +151,8 @@ addLayer("bs", {
                 'color': 'black'
             }
             else return {
-                'background-color': getBgColor(id),
-                'border-color': getBdColor(id),
+                'background-color': gridBgColor('bs',id),
+                'border-color': gridBdColor('bs',id),
                 'color': 'white'
             }
         },
@@ -176,8 +174,8 @@ return cost
         },
         onClick(data, id) { 
 
-getBgColor(id)
-getBdColor(id)
+gridBgColor('bs',id)
+gridBdColor('bs',id)
 if (player.bs.grid[id]>=1){
 player.bs.points = player.bs.points.sub(gridCost('bs',id))}
             if (player.bs.grid[id]<1){
