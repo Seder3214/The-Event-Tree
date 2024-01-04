@@ -1,6 +1,6 @@
 
 	function getBoosterEff() {
-  let boost=new Decimal(0)
+  let boost=new Decimal(1)
   for(var i in player.bs.grid) {
     if (new Decimal(getGridData("bs", i)).gt(0)) boost=boost.mul(layers.bs.grid.getEffect(new Decimal(getGridData("bs", i)), i))
   }
