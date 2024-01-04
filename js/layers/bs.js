@@ -19,15 +19,15 @@ addLayer("bs", {
     }},
     branches: ['pl'],
     color: "#4f6925",
-tooltip() {return format(player.ec.boosterPoints)+"  Bosster Points"},
     requires: new Decimal('1.8e220'), // Can be a function that takes requirement increases into account
     resource: "booster points", // Name of prestige currency
     baseResource: "stars", // Name of resource prestige is based on
     baseAmount() {return player.pl.points}, // Get the current amount of baseResource
-    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.1, // Prestige currency exponent
+    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 0.01, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+if (player.bs.grid[101]>=1) mult = mult.mul(getBoosterEff())
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -103,7 +103,7 @@ getBgColor(data,id) {
         },      
  getStyle(data, id) {
 
-            if (player.ec.boosterPoints.lte(gridStartCost('bs',id))&& player.bs.grid[id]<1) return {
+            if (player[this.layer].points.lte(gridStartCost('bs',id))&& player.bs.grid[id]<1) return {
                 'background-color': 'gray',
                 'border-color': 'gray',
                 'color': 'black'
@@ -127,26 +127,26 @@ return cost
             return true
         },
         getCanClick(data, id) {
-            if (player.bs.grid[id]<1) return (player.ec.boosterPoints.gte(gridStartCost('bs',id)))
-            return (player.ec.boosterPoints.gte(gridCost('bs',id)))
+            if (player.bs.grid[id]<1) return (player[this.layer].points.gte(gridStartCost('bs',id)))
+            return (player[this.layer].points.gte(gridCost('bs',id)))
         },
         onClick(data, id) { 
 
 gridBgColor('bs',id)
 gridBdColor('bs',id)
 if (player.bs.grid[id]>=1){
-player.ec.booaterPoints = player.ec.boosterPoints.sub(gridCost('bs',id))}
+player[this.layer].points = player[this.layer].points.sub(gridCost('bs',id))}
             if (player.bs.grid[id]<1){
-player.ec.boosterPoints = player.ec.boosterPoints.sub(gridStartCost('bs',id))
+player[this.layer].points = player[this.layer].points.sub(gridStartCost('bs',id))
 player.bs.total++}
             player[this.layer].grid[id]++
         },
 
 onHold(data, id) { 
 if (player.bs.grid[id]>=1){
-player.ec.booaterPoints = player.ec.boosterPoints.sub(gridCost('bs',id))}
+player[this.layer].points = player[this.layer].points.sub(gridCost('bs',id))}
             if (player.bs.grid[id]<1){
-player.ec.boosterPoints = player.ec.boosterPoints.sub(gridStartCost('bs',id))
+player[this.layer].points = player[this.layer].points.sub(gridStartCost('bs',id))
 player.bs.total++}
             player[this.layer].grid[id]++
         },
@@ -162,12 +162,12 @@ return eff
             else return '<h5>Empty Slot. Craft a booster to proceed.<br>Cost to craft: '+format(gridStartCost('bs',id))+" booster points</h5>"
         },
     },
-update(diff) {
-player.ec.boosterPoints = player.ec.boosterPoints.add(getBoosterEff().times(diff))},
     doReset(){
         layerDataReset('pl')
- player.ec.boosterPoints = player.ec.boosterPoints.add(1)
     },
+passiveGeneration() {
+if (player.bs.best.gte(1) return 1
+else return 0},
     row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "b", description: "b: Reset for booster points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
