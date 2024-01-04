@@ -157,8 +157,9 @@ player.bs.total++}
         },
         getEffect(data, id) {
             let eff = new Decimal(1.75)
-            let base = new Decimal(0.35)
-            if (player[this.layer].grid[id]>=1) eff = eff.pow(player[this.layer].grid[id]+1).pow(base).mul(0.36*(id%100)).mul(new Decimal(2).pow(Math.floor(id/100)-1))
+            let base = new Decimal(0.8)
+            if (player[this.layer].grid[id]>=1) eff = eff.pow(player[this.layer].grid[id]+1).pow(base).mul(1.36*(id%100)).mul(new Decimal(2).pow(Math.floor(id/100)-1))
+
 return eff
         },
         getDisplay(data, id) {
