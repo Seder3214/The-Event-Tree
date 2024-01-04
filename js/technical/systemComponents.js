@@ -118,9 +118,9 @@ var systemComponents = {
 		<span v-if="player.points.lt('1e1e6')"  class="overlayThing"> on current event run</span>
 		<br>
 
-<h2  class="overlayThing" id="points">{{format(player.pl.points)}}</h2>
+<h2  class="overlayThing" v-if="player.pl.points.gt(0)" id="points">{{format(player.pl.points)}}</h2>
  <span class="overlayThing"> stars.</span>
-		<h2  class="overlayThing" id="points">{{format(player.ec.boosterPoints)}}</h2>
+		<h2  class="overlayThing" v-if="player.bs.points.gt(0)" id="points">{{format(player.ec.boosterPoints)}}</h2>
  <span class="overlayThing"> booster points.</span>
 <div v-for="thing in tmp.displayThings" class="overlayThing"><span v-if="thing" v-html="thing"></span></div>
 	</div>
