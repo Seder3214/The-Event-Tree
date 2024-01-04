@@ -1,11 +1,11 @@
-function getBgColor() {
+function getBgColor(id) {
             let color  = "#";
             for (var i = 0; i < 6; i++) {
                 color += Math.floor(Math.random() * 10);
             }
             return color
         }
-      function getBdColor() {
+      function getBdColor(id) {
             let color  = "#";
             for (var i = 0; i < 6; i++) {
                 color += Math.floor((Math.random() * 10)-30);
@@ -153,8 +153,8 @@ addLayer("bs", {
                 'color': 'black'
             }
             else return {
-                'background-color': getBgColor(),
-                'border-color': getBdColor(),
+                'background-color': getBgColor(id),
+                'border-color': getBdColor(id),
                 'color': 'white'
             }
         },
