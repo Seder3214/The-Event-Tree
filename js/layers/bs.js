@@ -11,6 +11,7 @@ addLayer("bs", {
     }},
     branches: ['pl'],
     color: "#4f6925",
+tooltip() {return format(player.ec.boosterPoints)+"  Bosster Points"},
     requires: new Decimal('1.8e220'), // Can be a function that takes requirement increases into account
     resource: "booster points", // Name of prestige currency
     baseResource: "stars", // Name of resource prestige is based on
@@ -26,26 +27,26 @@ addLayer("bs", {
     },
     gain() {
         let sum = new Decimal(0)
-        if (player.bs.grid[101]>=1) sum = sum.add(gridEffect('bs',101))
-        if (player.bs.grid[102]>=1) sum = sum.add(gridEffect('bs',102))
-        if (player.bs.grid[103]>=1) sum=sum.add( gridEffect('bs',103))
-        if (player.bs.grid[104]>=1) sum =sum.add( gridEffect('bs',104))
-        if (player.bs.grid[105]>=1) sum =sum.add( gridEffect('bs',105))
-        if (player.bs.grid[201]>=1) sum =sum.add( gridEffect('bs',201))
-        if (player.bs.grid[202]>=1) sum =sum.add( gridEffect('bs',202))
-        if (player.bs.grid[203]>=1) sum =sum.add( gridEffect('bs',203))
-        if (player.bs.grid[204]>=1) sum =sum.add( gridEffect('bs',204))
-        if (player.bs.grid[205]>=1) sum =sum.add( gridEffect('bs',205))
-        if (player.bs.grid[301]>=1) sum =sum.add( gridEffect('bs',301))
-        if (player.bs.grid[302]>=1) sum =sum.add( gridEffect('bs',302))
-        if (player.bs.grid[303]>=1) sum =sum.add( gridEffect('bs',303))
-        if (player.bs.grid[304]>=1) sum =sum.add( gridEffect('bs',304))
-        if (player.bs.grid[305]>=1) sum =sum.add( gridEffect('bs',305))
-        if (player.bs.grid[401]>=1) sum =sum.add( gridEffect('bs',401))
-        if (player.bs.grid[402]>=1) sum =sum.add( gridEffect('bs',402))
-        if (player.bs.grid[403]>=1) sum =sum.add( gridEffect('bs',403))
-        if (player.bs.grid[404]>=1) sum =sum.add( gridEffect('bs',404))
-        if (player.bs.grid[405]>=1) sum =sum.add( gridEffect('bs',405))
+        if (player.bs.grid[101]>=1) sum = sum.mul(gridEffect('bs',101))
+        if (player.bs.grid[102]>=1) sum = sum.mul(gridEffect('bs',102))
+        if (player.bs.grid[103]>=1) sum=sum.mul( gridEffect('bs',103))
+        if (player.bs.grid[104]>=1) sum =sum.mul( gridEffect('bs',104))
+        if (player.bs.grid[105]>=1) sum =sum.mul( gridEffect('bs',105))
+        if (player.bs.grid[201]>=1) sum =sum.mul( gridEffect('bs',201))
+        if (player.bs.grid[202]>=1) sum =sum.mul( gridEffect('bs',202))
+        if (player.bs.grid[203]>=1) sum =sum.mul( gridEffect('bs',203))
+        if (player.bs.grid[204]>=1) sum =sum.mul( gridEffect('bs',204))
+        if (player.bs.grid[205]>=1) sum =sum.mul( gridEffect('bs',205))
+        if (player.bs.grid[301]>=1) sum =sum.mul( gridEffect('bs',301))
+        if (player.bs.grid[302]>=1) sum =sum.mul( gridEffect('bs',302))
+        if (player.bs.grid[303]>=1) sum =sum.mul( gridEffect('bs',303))
+        if (player.bs.grid[304]>=1) sum =sum.mul( gridEffect('bs',304))
+        if (player.bs.grid[305]>=1) sum =sum.mul( gridEffect('bs',305))
+        if (player.bs.grid[401]>=1) sum =sum.mul( gridEffect('bs',401))
+        if (player.bs.grid[402]>=1) sum =sum.mul( gridEffect('bs',402))
+        if (player.bs.grid[403]>=1) sum =sum.mul( gridEffect('bs',403))
+        if (player.bs.grid[404]>=1) sum =sum.mul( gridEffect('bs',404))
+        if (player.bs.grid[405]>=1) sum =sum.mul( gridEffect('bs',405))
         return sum
     },
     effect() {
@@ -184,12 +185,12 @@ player.bs.total++}
         },
         getEffect(data, id) {
             let eff = new Decimal(1)
-            let base = new Decimal(1)
-            if (player[this.layer].grid[id]>=1) eff = eff.mul(player[this.layer].grid[id]+1).pow((id%100)+(new Decimal(5).mul(Math.floor(id/100)-1)).pow(player.bs.grid[id]>=10?1+(player.bs.grid[id]-9)/1000:1)).pow(base).mul(new Decimal(1e7).pow(Math.floor(id/100)-1))        
+            let base = new Decimal(0.35)
+            if (player[this.layer].grid[id]>=1) eff = eff.mul(player[this.layer].grid[id]+1).pow(base).mul(0.36*(id%100)).add(new Decimal(0.5).mul(Math.floor(id/100)-1))
 return eff
         },
         getDisplay(data, id) {
-            if (player[this.layer].grid[id]>=1) return 'Tier '+format(player[this.layer].grid[id])+".<br><h5>Adds +"+format(gridEffect('bs', id))+' to Booster Points gain/s.<br>Cost to tier up: '+format(gridCost('bs',id))+" booster points"
+            if (player[this.layer].grid[id]>=1) return 'Tier '+format(player[this.layer].grid[id])+".<br><h5>Boost booster points gain by  "+format(gridEffect('bs', id))+'x<br>Cost to tier up: '+format(gridCost('bs',id))+" booster points"
             else return '<h5>Empty Slot. Craft a booster to proceed.<br>Cost to craft: '+format(gridStartCost('bs',id))+" booster points</h5>"
         },
     },
