@@ -148,7 +148,7 @@ addLayer("bs", {
 let color = getBgColor(id)
 let color2 = getBdColor(id)
 
-            if (player.bs.points.lte(getStartCost('bs',id))&& player.bs.grid[id]<1) return {
+            if (player.bs.points.lte(gridStartCost('bs',id))&& player.bs.grid[id]<1) return {
                 'background-color': 'gray',
                 'border-color': 'gray',
                 'color': 'black'
