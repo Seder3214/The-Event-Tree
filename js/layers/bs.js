@@ -166,7 +166,7 @@ return eff
         layerDataReset('pl')
     },
 passiveGeneration() {
-if (player.bs.best.gte(1) return 1
+if (player.bs.best.gte(1)) return 1
 else return 0},
     row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
