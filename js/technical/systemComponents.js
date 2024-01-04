@@ -111,11 +111,18 @@ var systemComponents = {
 			<br>Offline Time: {{formatTime(player.offTime.remain)}}<br>
 		</span>
 		<br>
+
+	
 		<span v-if="player.points.lt('1e1000')"  class="overlayThing">You spent </span>
 		<h2  class="overlayThing" id="points">{{formatTime(player.points.sub(10))}}</h2>
 		<span v-if="player.points.lt('1e1e6')"  class="overlayThing"> on current event run</span>
 		<br>
-		<div v-for="thing in tmp.displayThings" class="overlayThing"><span v-if="thing" v-html="thing"></span></div>
+
+<h2  class="overlayThing" id="points">{{format(player.pl.points)}}</h2>
+ <span class="overlayThing"> stars.</span>
+		<h2  class="overlayThing" id="points">{{format(player.ec.boosterPoints)}}</h2>
+ <span class="overlayThing"> booster points.</span>
+<div v-for="thing in tmp.displayThings" class="overlayThing"><span v-if="thing" v-html="thing"></span></div>
 	</div>
 	`
     },
