@@ -1,3 +1,16 @@
+
+function getBoosterEff() {
+let row1 = new Decimal(1)
+        let row2 = new Decimal(1)
+let sum = new Decimal(1)
+        let row3 = new Decimal(1)
+let row4 = new Decimal(1)
+        row1 =row1.mul(gridEffect('bs',101)).mul(gridEffect('bs',102)).mul(gridEffect('bs',103)).mul(gridEffect('bs',104)).mul(gridEffect('bs',105))
+row2 =row2.mul(gridEffect('bs',201)).mul(gridEffect('bs',202)).mul(gridEffect('bs',203)).mul(gridEffect('bs',204)).mul(gridEffect('bs',205))
+row3 =row3.mul(gridEffect('bs',301)).mul(gridEffect('bs',302)).mul(gridEffect('bs',303)).mul(gridEffect('bs',304)).mul(gridEffect('bs',305))
+row4 =row4.mul(gridEffect('bs',401)).mul(gridEffect('bs',402)).mul(gridEffect('bs',403)).mul(gridEffect('bs',404)).mul(gridEffect('bs',405))
+ return sum = row1.mul(row2).mul(row3).mul(row4)
+    }
 addLayer("bs", {
     name: "Boosters Event", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "BS", // This appears on the layer's node. Default is the id with the first letter capitalized
@@ -24,23 +37,6 @@ tooltip() {return format(player.ec.boosterPoints)+"  Bosster Points"},
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
-    },
-    gain() {
-        let sum = new Decimal(1)
-        sum = sum.add(tmp.bs.effect)
-        return sum
-    },
-    effect() {
-let row1 = new Decimal(1)
-        let row2 = new Decimal(1)
-let sum = new Decimal(1)
-        let row3 = new Decimal(1)
-let row4 = new Decimal(1)
-        row1 =row1.mul(gridEffect('bs',101)).mul(gridEffect('bs',102)).mul(gridEffect('bs',103)).mul(gridEffect('bs',104)).mul(gridEffect('bs',105))
-row2 =row2.mul(gridEffect('bs',201)).mul(gridEffect('bs',202)).mul(gridEffect('bs',203)).mul(gridEffect('bs',204)).mul(gridEffect('bs',205))
-row3 =row3.mul(gridEffect('bs',301)).mul(gridEffect('bs',302)).mul(gridEffect('bs',303)).mul(gridEffect('bs',304)).mul(gridEffect('bs',305))
-row4 =row4.mul(gridEffect('bs',401)).mul(gridEffect('bs',402)).mul(gridEffect('bs',403)).mul(gridEffect('bs',404)).mul(gridEffect('bs',405))
- return sum = row1.mul(row2).mul(row3).mul(row4)
     },
     tabFormat: {
         "Main": {
@@ -170,6 +166,9 @@ return eff
             else return '<h5>Empty Slot. Craft a booster to proceed.<br>Cost to craft: '+format(gridStartCost('bs',id))+" booster points</h5>"
         },
     },
+update(diff) {
+player.ec.boosterPoints = player
+ec.boosterPoints.add(getBoosterEff().times(diff)},
     doReset(){
         layerDataReset('pl')
  player.bs.points = player.bs.points.add(1)
