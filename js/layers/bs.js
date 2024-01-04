@@ -27,26 +27,7 @@ tooltip() {return format(player.ec.boosterPoints)+"  Bosster Points"},
     },
     gain() {
         let sum = new Decimal(1)
-        if (player.bs.grid[101]>=1) sum = sum.mul(gridEffect('bs',101))
-        if (player.bs.grid[102]>=1) sum = sum.mul(gridEffect('bs',102))
-        if (player.bs.grid[103]>=1) sum=sum.mul( gridEffect('bs',103))
-        if (player.bs.grid[104]>=1) sum =sum.mul( gridEffect('bs',104))
-        if (player.bs.grid[105]>=1) sum =sum.mul( gridEffect('bs',105))
-        if (player.bs.grid[201]>=1) sum =sum.mul( gridEffect('bs',201))
-        if (player.bs.grid[202]>=1) sum =sum.mul( gridEffect('bs',202))
-        if (player.bs.grid[203]>=1) sum =sum.mul( gridEffect('bs',203))
-        if (player.bs.grid[204]>=1) sum =sum.mul( gridEffect('bs',204))
-        if (player.bs.grid[205]>=1) sum =sum.mul( gridEffect('bs',205))
-        if (player.bs.grid[301]>=1) sum =sum.mul( gridEffect('bs',301))
-        if (player.bs.grid[302]>=1) sum =sum.mul( gridEffect('bs',302))
-        if (player.bs.grid[303]>=1) sum =sum.mul( gridEffect('bs',303))
-        if (player.bs.grid[304]>=1) sum =sum.mul( gridEffect('bs',304))
-        if (player.bs.grid[305]>=1) sum =sum.mul( gridEffect('bs',305))
-        if (player.bs.grid[401]>=1) sum =sum.mul( gridEffect('bs',401))
-        if (player.bs.grid[402]>=1) sum =sum.mul( gridEffect('bs',402))
-        if (player.bs.grid[403]>=1) sum =sum.mul( gridEffect('bs',403))
-        if (player.bs.grid[404]>=1) sum =sum.mul( gridEffect('bs',404))
-        if (player.bs.grid[405]>=1) sum =sum.mul( gridEffect('bs',405))
+        sum = sum.mul(tmp.bs.effect)
         return sum
     },
     effect() {
@@ -72,7 +53,6 @@ tooltip() {return format(player.ec.boosterPoints)+"  Bosster Points"},
         if (player.bs.grid[403]>=1) sum =sum.add( gridEffect('bs',403))
         if (player.bs.grid[404]>=1) sum =sum.add( gridEffect('bs',404))
         if (player.bs.grid[405]>=1) sum =sum.add( gridEffect('bs',405))
-        power = new Decimal(sum).pow(0.5)
         return power
     },
     tabFormat: {
