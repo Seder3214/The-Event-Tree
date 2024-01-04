@@ -58,7 +58,7 @@ addLayer("bs", {
             display() {
                     let data = tmp[this.layer].buyables[this.id]
                     return "<h2><b>Add one more row of boosters</b></h2> <br>" + "With power of boosters, you can craft more of them! <br>Requirement: " + format(data.cost) + " Booster Points <br>" + "Addition: +" + formatWhole(player[this.layer].buyables[this.id]) + "/6 rows."},
-            canAfford() { return player.ec.booaterPoints.gte(this.cost()) },
+            canAfford() { return player.ec.boosterPoints.gte(this.cost()) },
             buy() {
                                 cost = tmp[this.layer].buyables[this.id].cost
                 setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
@@ -163,6 +163,7 @@ return eff
     },
     doReset(){
         layerDataReset('pl')
+player.ec.boosterPoints = player.ec.boosterPoints.add(1)
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
 
