@@ -107,7 +107,7 @@ addLayer("bs", {
             },
                                                             style() {
                                                                                 let data = tmp[this.layer].buyables[this.id]
-                    if (player.ec.points.lt(data.cost)) return {
+                    if (player.ec.boosterPoints.lt(data.cost)) return {
                             'border-color': 'gray',
                             'background-color': '#181818',
                             'color': 'white',
@@ -144,7 +144,7 @@ getBgColor(data,id) {
         },      
  getStyle(data, id) {
 
-            if (player.bs.points.lte(gridStartCost('bs',id))&& player.bs.grid[id]<1) return {
+            if (player.ec.boosterPoints.lte(gridStartCost('bs',id))&& player.bs.grid[id]<1) return {
                 'background-color': 'gray',
                 'border-color': 'gray',
                 'color': 'black'
@@ -168,17 +168,17 @@ return cost
             return true
         },
         getCanClick(data, id) {
-            if (player.bs.grid[id]<1) return (player.bs.points.gte(gridStartCost('bs',id)))
-            return (player.bs.points.gte(gridCost('bs',id)))
+            if (player.bs.grid[id]<1) return (player.ec.boosterPoints.gte(gridStartCost('bs',id)))
+            return (player.ec.boosterPoints.gte(gridCost('bs',id)))
         },
         onClick(data, id) { 
 
 gridBgColor('bs',id)
 gridBdColor('bs',id)
 if (player.bs.grid[id]>=1){
-player.bs.points = player.bs.points.sub(gridCost('bs',id))}
+player.ec.booaterPoints = player.ec.boosterPoints.sub(gridCost('bs',id))}
             if (player.bs.grid[id]<1){
-player.bs.points = player.bs.points.sub(gridStartCost('bs',id))
+player.ec.boosterPoints = player.ec.boosterPoints.sub(gridStartCost('bs',id))
 player.bs.total++}
             player[this.layer].grid[id]++
         },
