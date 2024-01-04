@@ -154,6 +154,8 @@ boosterPoints: new Decimal(0),
     doReset(){
         layerDataReset('pl')
     },
+update(diff) {
+player.ec.boosterPoints = player.ec.boosterPoints.add(getBoosterEff())},
     row: "side", // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "e", description: "e: Reset for event fragments", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
