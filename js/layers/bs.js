@@ -1,3 +1,17 @@
+fucntion getBgColor() {
+            let color  = "#";
+            for (var i = 0; i < 6; i++) {
+                color += Math.floor(Math.random() * 10);
+            }
+            return color
+        },
+      function getBdColor() {
+            let color  = "#";
+            for (var i = 0; i < 6; i++) {
+                color += Math.floor((Math.random() * 10)-30);
+            }
+            return color
+        }
 addLayer("bs", {
     name: "Boosters Event", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "BS", // This appears on the layer's node. Default is the id with the first letter capitalized
@@ -132,8 +146,8 @@ addLayer("bs", {
         },
         getStyle(data, id) {
             if (player.bs.grid[id]>0) return {
-                'background-color': gridBgColor('bs',id),
-                'border-color': gridBdColor('bs',id),
+                'background-color': getBgColor(id),
+                'border-color': getBdColor(id),
                 'color': 'white'
             }
         },
@@ -152,20 +166,6 @@ return cost
         getCanClick(data, id) {
             if (player.bs.grid[id]<1) return (player.bs.points.gte(gridStartCost('bs',id)))
             return (player.bs.points.gte(gridCost('bs',id)))
-        },
-getBgColor(id) {
-            let color  = "#";
-            for (var i = 0; i < 6; i++) {
-                color += Math.floor(Math.random() * 10);
-            }
-            return color
-        },
-        getBdColor(id) {
-            let color  = "#";
-            for (var i = 0; i < 6; i++) {
-                color += Math.floor((Math.random() * 10)-30);
-            }
-            return color
         },
         onClick(data, id) { 
 if (player.bs.grid[id]>=1){
