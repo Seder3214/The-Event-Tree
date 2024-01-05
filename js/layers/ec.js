@@ -8,7 +8,8 @@ addLayer("ec", {
 boosterPoints: new Decimal(0),
     }},
     color: "#343029",
-    requires() { if (player.ec.points.gte(3)) return new Decimal(1e10)
+    requires() {if (player.ec.points.gte(4)) return new Decimal(1e30)
+ if (player.ec.points.gte(3)) return new Decimal(1e10)
         else return new Decimal(1e15)}, // Can be a function that takes requirement increases into account
     resource: "event fragments", // Name of prestige currency
     baseResource() {if (player.ec.points.gte(3)) return 'booster points'
