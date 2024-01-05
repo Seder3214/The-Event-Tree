@@ -78,7 +78,7 @@ addLayer("bs", {
                 unlocked() {return true},
         },
         12: {
-            cost(x) {return new Decimal(1e12).pow(x.add(1)) },
+            cost(x) {return new Decimal(1e12).pow(x.div(5).add(1)) },
             purchaseLimit: new Decimal(5),
             display() {
                     let data = tmp[this.layer].buyables[this.id]
