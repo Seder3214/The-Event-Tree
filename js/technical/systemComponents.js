@@ -118,10 +118,10 @@ var systemComponents = {
 		<span v-if="player.points.lt('1e1e6')"  class="overlayThing"> on current event run</span>
 		<br><br>
 <div id='stats'>
-<h2  class="overlayThing" v-if="player.pl.points.gt(0)" style="color: rgb(52, 40, 133); text-shadow: rgb(52, 40, 133) 0px 0px 10px;" id="points">{{format(player.pl.points)}}</h2><h3>Stars.</h3>
- <h2  class="overlayThing" v-if="player.ec.points.gt(0)" style="color: rgb(52, 48, 41); text-shadow: rgb(52, 48, 41) 0px 0px 10px;" id="points">{{format(player.ec.points)}}</h2><h3>Event Fragments.</h3>
+<h2  class="overlayThing" v-if="player.pl.points.gt(0)" style="color: rgb(52, 40, 133); text-shadow: rgb(52, 40, 133) 0px 0px 10px;" id="points">{{format(player.pl.points)}}</h2><h3 v-if="player.pl.points.gt(0)">Stars.</h3>
+ <h2  class="overlayThing" v-if="player.ec.points.gt(0)" style="color: rgb(52, 48, 41); text-shadow: rgb(52, 48, 41) 0px 0px 10px;" id="points">{{format(player.ec.points)}}</h2><h3 v-if="player.ec.points.gt(0)">Event Fragments.</h3>
  <br>
-		<h2  class="overlayThing" style="color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;" v-if="player.bs.points.gt(0)" id="points">{{format(player.bs.points)}}</h2><h3>Booster Points.</h3></div>
+		<h2  class="overlayThing" style="color:  #4f6925; text-shadow: #4f6925 0px 0px 10px;" v-if="player.bs.points.gt(0)" id="points">{{format(player.bs.points)}}</h2><h3 v-if="player.bs.points.gt(0)">Booster Points.</h3></div>
  <br>
 <div v-for="thing in tmp.displayThings" class="overlayThing"><span v-if="thing" v-html="thing"></span></div>
 	</div>
