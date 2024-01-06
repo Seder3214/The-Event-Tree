@@ -135,7 +135,7 @@ addLayer("pl", {
             ["row", [["upgrade", 33],["blank",['30px','50px']],["upgrade", 34],["blank",['30px','50px']],["upgrade", 35],["blank",['30px','50px']],["upgrade", 36],["blank",['30px','50px']],["upgrade", 37]]],
             ["row", [["upgrade", 38],["blank",['30px','50px']],["upgrade", 39],["blank",['30px','50px']],["upgrade", 41],["blank",['30px','50px']],["upgrade", 42],["blank",['30px','50px']],["upgrade", 43]]],
             ["row", [["upgrade", 44],["blank",['30px','50px']],["upgrade", 45],["blank",['30px','50px']],["upgrade", 46],["blank",['30px','50px']],["upgrade", 47],["blank",['30px','50px']],["upgrade", 48]]],
-            ["row", [["upgrade", 49],["blank",['30px','50px']],["upgrade", 51],["blank",['30px','50px']],["upgrade", 52],["blank",['30px','50px']],["upgrade", 53],["blank",['30px','50px']],["upgrade", 54]]],
+            ["row", [["upgrade", 49],["blank",['30px','50px']],["upgrade", 50],["blank",['30px','50px']],["upgrade", 51],["blank",['30px','50px']],["upgrade", 52],["blank",['30px','50px']],["upgrade", 53],["blank",['30px','50px']],["upgrade", 54]]],
             ["row", [["upgrade", 55],["blank",['30px','50px']],["upgrade", 56],["blank",['30px','50px']],["upgrade", 57],["blank",['30px','50px']],["upgrade", 58],["blank",['30px','50px']],["upgrade", 59]]],
             ["row", [["upgrade", 61],["blank",['30px','50px']],["upgrade", 62],["blank",['30px','50px']],["upgrade", 63]]],
             ]
