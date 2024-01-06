@@ -77,6 +77,6 @@ function maxTickLength() {
 function fixOldSave(oldVersion){
 if (player.bs.grid[101].tier==undefined) {
 for (i in player.bs.grid) {
-player.bs.grid[i] = {type: "normal", tier: 0}}
+player.bs.grid[i] = {type: "normal", tier: 0}
 }}
 }
