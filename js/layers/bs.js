@@ -213,7 +213,7 @@ return cost
             let chance = Math.random()
 if (data.tier>=1 && player.bs.points.gte(gridCost('bs',id))){
     if(chance<0.1 && hasUpgrade('ec',14) && data.type=='normal') {
-        x = Math.floor(Math.random() * ((buyableEffect('ec',12)+1) - 1) + 1);
+        x = Math.floor(Math.random() * ((buyableEffect('ec',12).add(1)) - 1) + 1);
         player.bs.grid[id] = {type:player.bs.pool[x],tier: data.tier }
     }
 player.bs.points = player.bs.points.sub(gridCost('bs',id))
@@ -228,7 +228,7 @@ if (data.tier<1 && player.bs.points.gte(gridStartCost('bs',id))){
             let chance = Math.random()
 if (data.tier>=1 && player.bs.points.gte(gridCost('bs',id))){
     if(chance<0.1 && hasUpgrade('ec',14) && data.type=='normal') {
-        x = Math.floor(Math.random() * ((buyableEffect('ec',12)+1) - 1) + 1);
+        x = Math.floor(Math.random() * ((buyableEffect('ec',12).add(1)) - 1) + 1);
         player.bs.grid[id] = {type:player.bs.pool[x],tier: data.tier }
 }
     }
