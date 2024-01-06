@@ -272,6 +272,7 @@ switch (data.type) {
     
     doReset(){
      layerDataReset('pl')
+player.bs.points = plauer.bs.points.add(1)
     },
     update(diff) {
        if (player.bs.grid[101].tier>=1) player.bs.points = player.bs.points.add(tmp.bs.getBoosterEff.times(diff))
