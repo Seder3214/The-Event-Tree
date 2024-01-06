@@ -271,7 +271,7 @@ switch (data.type) {
     },
     
     doReset(){
-                if (!hasUpgrade('ec',14)) layerDataReset('pl')
+     layerDataReset('pl')
     },
     update(diff) {
        if (player.bs.grid[101].tier>=1) player.bs.points = player.bs.points.add(tmp.bs.getBoosterEff.times(diff))
