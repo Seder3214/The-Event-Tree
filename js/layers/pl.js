@@ -133,11 +133,11 @@ addLayer("pl", {
             ["row", [["upgrade", 22],["blank",['30px','50px']],["upgrade", 23],["blank",['30px','50px']],["upgrade", 24],["blank",['30px','50px']],["upgrade", 25],["blank",['30px','50px']],["upgrade", 26]]],
             ["row", [["upgrade", 27],["blank",['30px','50px']],["upgrade", 28],["blank",['30px','50px']],["upgrade", 29],["blank",['30px','50px']],["upgrade", 31],["blank",['30px','50px']],["upgrade", 32]]],
             ["row", [["upgrade", 33],["blank",['30px','50px']],["upgrade", 34],["blank",['30px','50px']],["upgrade", 35],["blank",['30px','50px']],["upgrade", 36],["blank",['30px','50px']],["upgrade", 37]]],
-            ["row", [["upgrade", 38],["blank",['30px','50px']],["upgrade", 39],["blank",['30px','50px']],["upgrade", 40],["blank",['30px','50px']],["upgrade", 41],["blank",['30px','50px']],["upgrade", 42]]],
-            ["row", [["upgrade", 43],["blank",['30px','50px']],["upgrade", 44],["blank",['30px','50px']],["upgrade", 45],["blank",['30px','50px']],["upgrade", 46],["blank",['30px','50px']],["upgrade", 47]]],
-            ["row", [["upgrade", 48],["blank",['30px','50px']],["upgrade", 49],["blank",['30px','50px']],["upgrade", 51],["blank",['30px','50px']],["upgrade", 52],["blank",['30px','50px']],["upgrade", 53]]],
-            ["row", [["upgrade", 54],["blank",['30px','50px']],["upgrade", 55],["blank",['30px','50px']],["upgrade", 56],["blank",['30px','50px']],["upgrade", 57],["blank",['30px','50px']],["upgrade", 58]]],
-            ["row", [["upgrade", 59],["blank",['30px','50px']],["upgrade", 60],["blank",['30px','50px']],["upgrade", 61],["blank",['30px','50px']],["upgrade", 62],["blank",['30px','50px']],["upgrade",63]]],
+            ["row", [["upgrade", 38],["blank",['30px','50px']],["upgrade", 39],["blank",['30px','50px']],["upgrade", 41],["blank",['30px','50px']],["upgrade", 42],["blank",['30px','50px']],["upgrade", 43]]],
+            ["row", [["upgrade", 44],["blank",['30px','50px']],["upgrade", 45],["blank",['30px','50px']],["upgrade", 46],["blank",['30px','50px']],["upgrade", 47],["blank",['30px','50px']],["upgrade", 48]]],
+            ["row", [["upgrade", 49],["blank",['30px','50px']],["upgrade", 51],["blank",['30px','50px']],["upgrade", 52],["blank",['30px','50px']],["upgrade", 53],["blank",['30px','50px']],["upgrade", 54]]],
+            ["row", [["upgrade", 55],["blank",['30px','50px']],["upgrade", 56],["blank",['30px','50px']],["upgrade", 57],["blank",['30px','50px']],["upgrade", 58],["blank",['30px','50px']],["upgrade", 59]]],
+            ["row", [["upgrade", 61],["blank",['30px','50px']],["upgrade", 62],["blank",['30px','50px']],["upgrade", 63],["blank",['30px','50px']],["upgrade", 62]]],
             ]
 			]
         },
