@@ -1077,7 +1077,7 @@ addLayer("pl", {
             branches: [49],
             title: "Terraforming Mars: Importing Ammonia (1/6)",
             description() {return "Saturn and Jupiter 100% less efficient. <br>Mars 1000% more efficient."},
-            cost: new Decimal(1e77),
+            cost: new Decimal(1e76),
             unlocked() {return hasUpgrade('pl',49)},
             style() {
             if (hasUpgrade("pl", 50)) return {
@@ -1101,7 +1101,7 @@ addLayer("pl", {
             branches: [49],
             title: "Terraforming Mars: Importing hydrocarbons (2/6)",
             description() {return "Mars 10000% more efficient."},
-            cost: new Decimal(1e80),
+            cost: new Decimal(1e79),
             unlocked() {return hasUpgrade('pl',49)},
             style() {
             if (hasUpgrade("pl", 51)) return {
@@ -1125,7 +1125,7 @@ addLayer("pl", {
             branches: [49],
             title: "Terraforming Mars: Using fluorine compounds (3/6)",
             description() {return "Mars 5000% more efficient."},
-            cost: new Decimal(5e81),
+            cost: new Decimal(5e80),
             unlocked() {return hasUpgrade('pl',49)},
             style() {
             if (hasUpgrade("pl", 52)) return {
@@ -1149,7 +1149,7 @@ addLayer("pl", {
             branches: [49],
             title: "Terraforming Mars: Using orbital mirrors (4/6)",
             description() {return "Mars 15000% more efficient."},
-            cost: new Decimal(1e84),
+            cost: new Decimal(1e83),
             unlocked() {return hasUpgrade('pl',49)},
             style() {
             if (hasUpgrade("pl", 53)) return {
@@ -1173,7 +1173,7 @@ addLayer("pl", {
             branches: [49],
             title: "Terraforming Mars: Albedo reduction (5/6)",
             description() {return "Mars 20000% more efficient."},
-            cost: new Decimal(2.35e86),
+            cost: new Decimal(2.35e85),
             unlocked() {return hasUpgrade('pl',49)},
             style() {
             if (hasUpgrade("pl", 54)) return {
@@ -1197,7 +1197,7 @@ addLayer("pl", {
             branches: [50,51,52,53,54],
             title: "Terraforming Mars: Protecting atmosphere (6/6)",
             description() {return "Mars 1e15% more efficient."},
-            cost: new Decimal(1e88),
+            cost: new Decimal(1e87),
             unlocked() {return hasUpgrade('pl',54)},
             style() {
             if (hasUpgrade("pl", 55)) return {
