@@ -225,10 +225,12 @@ if (data.tier<1 && player.bs.points.gte(gridStartCost('bs',id))){
     player.bs.total++}
         },
         onHold(data, id) { 
-            if (data.tier>=1 && player.bs.points.gte(gridCost('bs',id))){
-                player.bs.points = player.bs.points.sub(gridCost('bs',id))
-                data.tier++
-                }
+            let chance = Math.random()
+if (data.tier>=1 && player.bs.points.gte(gridCost('bs',id))){
+    if(chance<0.1 && hasUpgrade('ec',14) && data.type=='normal') {
+        x = Math.floor(Math.random() * ((buyableEffect('ec',12)+1) - 1) + 1);
+        player.bs.grid[id] = {type:player.bs.pool[x],tier: data.tier }
+    }
                             if (data.tier<1 && player.bs.points.gte(gridStartCost('bs',id))){
                 player.bs.points = player.bs.points.sub(gridStartCost('bs',id))
                 data.tier++
