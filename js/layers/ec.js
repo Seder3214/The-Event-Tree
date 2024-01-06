@@ -189,7 +189,7 @@ boosterPoints: new Decimal(0),
         },
         14: {
             title: "Events Synergy I",
-            description() {return "<h5>Stars boosts <b>booster tier</b> amount in their effect.<br> Planetary Event will no longer be resetted.<br>Now you have a 35% chance to get different type booster. Also unlock Booster Type Unlocker"},
+            description() {return "<h5>Stars boosts <b>booster tier</b> amount in their effect.<br> Planetary Event will no longer be resetted.<br>Now you have a 10% chance to get different type booster. Also unlock Booster Type Unlocker"},
             cost: new Decimal(4),
            canAfford() {return player.ec.points.gte(4)},
             unlocked() {return (hasUpgrade('ec',13))},
