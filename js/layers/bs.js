@@ -30,9 +30,9 @@ function seededRandom(seed) {
     return x - Math.floor(x);
 }
 function sidewaysEff() {
-    let boost=new Decimal(0)
+    let boost=new Decimal(1)
     for(var i in player.bs.grid) {
-      if (getGridData("bs", i).type=='sideways') boost=boost.add(gridEffect('bs',i).eff2)
+      if (getGridData("bs", i).type=='sideways') boost=boost.mul(gridEffect('bs',i).eff2)
     }
     return boost
   }
