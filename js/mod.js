@@ -55,7 +55,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.bs.grid[107].gte(1)
+	return player.bs.grid[107]>0
 }
 
 
