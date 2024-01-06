@@ -35,6 +35,7 @@ addLayer("pl", {
         if (player.pl.buyables[18].gte(1)) gain = gain.add(buyableEffect('pl',18).eff)
         if (player.pl.buyables[19].gte(1)) gain = gain.add(buyableEffect('pl',19).eff)
         if (hasUpgrade('ec',13)) gain = gain.mul(1e20)
+        if (starredEff().gte(1)) gain = gain.mul(starredEff())
         return gain
     },
     base() {
@@ -49,7 +50,7 @@ addLayer("pl", {
         content:[
             function() {if (player.tab == "pl") return "main-display"
 },
-            function() { if (player.tab == "pl")  return ["column", [
+            function() { if (player.tab == "pl" && player.ec.points.lt(4))  return ["column", [
             ['clickable',11],
             "blank",
             ["display-text", "<i style='color: grey'>What is <b>space</b>? And how big is our Solar System?</i> <br>Explore all planets in solar system, and <i>maybe there is something that will unlock after completing this event...</i><hr>"],
@@ -120,7 +121,26 @@ addLayer("pl", {
             ["row", [ ["upgrade", 61],["blank",[hasUpgrade('pl',60)?'200px':'0px','50px']],["upgrade", 59],["blank",[hasUpgrade('pl',60)?'200px':'0px','50px']],["upgrade", 63]]],
             ]
 			]
+
  },
+ function() { if (player.tab == "pl" && player.ec.points.gte(4))  return ["column", [
+            ['clickable',11],
+            "blank",
+            "buyables",
+            ["blank",'50px'],
+            ["row", [["upgrade", 11],["blank",['30px','50px']],["upgrade", 12],["blank",['30px','50px']],["upgrade", 13],["blank",['30px','50px']],["upgrade", 14],["blank",['30px','50px']],["upgrade", 15]]],
+            ["row", [["upgrade", 16],["blank",['30px','50px']],["upgrade", 17],["blank",['30px','50px']],["upgrade", 18],["blank",['30px','50px']],["upgrade", 19],["blank",['30px','50px']],["upgrade", 21]]],
+            ["row", [["upgrade", 22],["blank",['30px','50px']],["upgrade", 23],["blank",['30px','50px']],["upgrade", 24],["blank",['30px','50px']],["upgrade", 25],["blank",['30px','50px']],["upgrade", 26]]],
+            ["row", [["upgrade", 27],["blank",['30px','50px']],["upgrade", 28],["blank",['30px','50px']],["upgrade", 29],["blank",['30px','50px']],["upgrade", 31],["blank",['30px','50px']],["upgrade", 32]]],
+            ["row", [["upgrade", 33],["blank",['30px','50px']],["upgrade", 34],["blank",['30px','50px']],["upgrade", 35],["blank",['30px','50px']],["upgrade", 36],["blank",['30px','50px']],["upgrade", 37]]],
+            ["row", [["upgrade", 38],["blank",['30px','50px']],["upgrade", 39],["blank",['30px','50px']],["upgrade", 41],["blank",['30px','50px']],["upgrade", 42],["blank",['30px','50px']],["upgrade", 43]]],
+            ["row", [["upgrade", 44],["blank",['30px','50px']],["upgrade", 45],["blank",['30px','50px']],["upgrade", 46],["blank",['30px','50px']],["upgrade", 47],["blank",['30px','50px']],["upgrade", 48]]],
+            ["row", [["upgrade", 49],["blank",['30px','50px']],["upgrade", 51],["blank",['30px','50px']],["upgrade", 52],["blank",['30px','50px']],["upgrade", 53],["blank",['30px','50px']],["upgrade", 54]]],
+            ["row", [["upgrade", 55],["blank",['30px','50px']],["upgrade", 56],["blank",['30px','50px']],["upgrade", 57],["blank",['30px','50px']],["upgrade", 58],["blank",['30px','50px']],["upgrade", 59]]],
+            ["row", [["upgrade", 61],["blank",['30px','50px']],["upgrade", 62],["blank",['30px','50px']],["upgrade", 63]]],
+            ]
+			]
+        },
  ]
         },
     },

@@ -17,7 +17,7 @@ boosterPoints: new Decimal(0),
     baseAmount() {if (player.ec.points.gte(3)) return player.bs.points
         else return player.pl.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent() {if (player.ec.points.gte(3)) return 1.5
+    exponent() {if (player.ec.points.gte(3)) return 3
         else return 5.85}, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
@@ -49,6 +49,7 @@ boosterPoints: new Decimal(0),
     buyables: {
         11: {
             cost(x) {return new Decimal(1).mul(x.add(1)) },
+            purchaseLimit: new Decimal(3),
             display() {
                     let data = tmp[this.layer].buyables[this.id]
                     return "<h2><b>Expand Planetary Event</b></h2> <br>" + "Event Cofigurator allows you to modify events! Unlock more planets and upgrades per level. <br>Requirement: " + format(data.cost) + " Event Fragments <br>" + "Expandation: " + formatWhole(player[this.layer].buyables[this.id]) + "/3. At third expand, unlock new layer"},
@@ -71,6 +72,37 @@ boosterPoints: new Decimal(0),
                         }
                 },
                 unlocked() {return true},
+        },
+        12: {
+            cost(x) {return new Decimal(4).mul(x.add(1)) },
+            purchaseLimit: new Decimal(6),
+            display() {
+                    let data = tmp[this.layer].buyables[this.id]
+                    return "<h2><b>Unlock new booster types</b></h2> <br>" + "Event Cofigurator allows you to modify events! Unlock more booster types per level. <br>Requirement: " + format(data.cost) + " Event Fragments <br>" + "Currently: +" + formatWhole(buyableEffect('ec',12)) + "/18. At third expand, unlock new layer"},
+            canAfford() { return player[this.layer].points.gte(this.cost()) },
+            buy() {
+                                cost = tmp[this.layer].buyables[this.id].cost
+                setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+            },
+            effect(x) {
+                let eff = new Decimal(0)
+                eff = x.mul(3)
+                return eff
+            },
+                                                            style() {
+                                                                                let data = tmp[this.layer].buyables[this.id]
+                    if (player.ec.points.lt(data.cost)) return {
+                            'border-color': 'gray',
+                            'background-color': '#181818',
+                            'color': 'white',
+                        }
+                    else return {
+                            'border-color': '#343029',
+                            'background-color': '#181818',
+                            'color': 'white',
+                        }
+                },
+                unlocked() {return hasUpgrade('ec',14)},
         },
     },
     upgrades: {
@@ -155,9 +187,42 @@ boosterPoints: new Decimal(0),
             }
             },
         },
+        14: {
+            title: "Events Synergy I",
+            description() {return "<h5>Stars boosts <b>booster tier</b> amount in their effect.<br> Planetary Event will no longer be resetted.<br>Now you have a 35% chance to get different type booster. Also unlock Booster Type Unlocker"},
+            cost: new Decimal(4),
+           canAfford() {return player.ec.points.gte(4)},
+            unlocked() {return (hasUpgrade('ec',13))},
+            effect() {
+                let eff = new Decimal(1)
+                eff = player.pl.points.add(1).log10().add(1).log10().add(1)
+                return eff
+            },
+            effectDisplay() { return "x"+format(upgradeEffect('ec',14))},
+            pay(){
+                return player.ec.points = player.ec.points
+            },
+            style() {
+            if (hasUpgrade("ec", 14)) return {
+                'border-color': '#343029',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            if (player.ec.points.gte(this.cost)) return {
+                'border-color': 'yellow',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            else return {
+                'border-color': 'gray',
+                'background-color': '#181818',
+                'color': 'white'
+            }
+            },
+        },
     },
     doReset(){
-        layerDataReset('pl')
+        if (!hasUpgrade('ec',14)) layerDataReset('pl')
     },
     row: "side", // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
