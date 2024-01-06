@@ -75,4 +75,8 @@ function maxTickLength() {
 // Use this if you need to undo inflation from an older version. If the version is older than the version that fixed the issue,
 // you can cap their current resources with this.
 function fixOldSave(oldVersion){
+if (player.bs.grid[101].tier==undefined) {
+for (i in player.bs.grid) {
+player.bs.grid[i] = {type: "normal", tier: 0}}
+}}
 }
