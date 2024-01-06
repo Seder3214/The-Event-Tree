@@ -128,7 +128,7 @@ addLayer("pl", {
             "blank",
             "buyables",
             ["blank",'50px'],
-             "upgrades,
+             "upgrades",
             ]
 			]
         },
