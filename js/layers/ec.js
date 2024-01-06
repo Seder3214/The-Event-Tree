@@ -161,7 +161,7 @@ boosterPoints: new Decimal(0),
             },
         },
         13: {
-            title: "Planet Boost II",
+            title: "Planet Boost III",
             description() {return "Get a 1e22% boost to stars gain."},
             cost: new Decimal(3),
            canAfford() {return player.ec.points.gte(3)},
