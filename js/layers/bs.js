@@ -244,7 +244,7 @@ switch (data.type) {
     case "normal":  return {eff: eff,eff2: eff2 = eff}
     case "starred": return {eff: eff, eff2: eff2 = eff.pow(1.475).pow(player.pl.points.add(1).log10().add(1).log(2))}
     case "scaled":  return {eff: eff, eff2: eff2 = eff.mul(5)}
-    case "sideways": return {eff:eff,eff2:eff2 = eff.add(1).log(10).div(100).add(1))}
+    case "sideways": return {eff:eff,eff2:eff2 = eff.add(1).log(10).div(100).add(1)}
     default: return new Decimal(0)
 }
         },
