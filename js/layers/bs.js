@@ -55,7 +55,6 @@ addLayer("bs", {
         unlocked: false,
         colors: {},
 		points: new Decimal(0),
-        total: 0,
         best: new Decimal(0),
         pool: ["starred", "scaled", "sideways"],
         gridPower: new Decimal(0),
