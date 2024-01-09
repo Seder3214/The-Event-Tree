@@ -39,7 +39,7 @@ function sidewaysEff() {
   function starredEff() {
     let boost=new Decimal(1)
     for(var i in player.bs.grid) {
-      if (getGridData("bs", i).type=='starred') boost=boost.add(gridEffect('bs',i).eff2)
+      if (getGridData("bs", i).type=='starred') boost=boost.mul(gridEffect('bs',i).eff2)
     }
     return boost
   }
@@ -177,8 +177,8 @@ return color
         },   
  getStyle(data, id) {
             if (data.tier<1) return {
-                'width':'105px',
-                'height':'105px',
+                'width':'115px',
+                'height':'115px',
                 'background-color': 'gray',
                 'border-color': 'dark gray',
                 'color': 'black'
@@ -187,8 +187,8 @@ return color
              return {
                 'background': getColor(player.bs.colors[id], data.tier),
                 'border-color': '',
-                'width':'105px',
-                'height':'105px',
+                'width':'115px',
+                'height':'115px',
             }
         },
         getCost(data,id) {

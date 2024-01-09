@@ -223,8 +223,9 @@ boosterPoints: new Decimal(0),
     },
     doReset(){
         if (!hasUpgrade('ec',14)) layerDataReset('pl')
-layerDataReset('bs')
-if (hasUpgrade('ec',14)) player.bs.points = player.bs.points.add(1)
+        for (i in player.bs.grid) {
+            player.bs.grid[i] = {type: "normal", tier: 0}
+            }
     },
     row: "side", // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
